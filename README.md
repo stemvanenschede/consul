@@ -65,7 +65,7 @@ Run the tests with:
 bin/rspec
 ```
 
-You can use the default admin user from the dev seeds file:
+You can use the default admin user from the seeds file:
 
  **user:** admin@consul.dev
  **pass:** 12345678

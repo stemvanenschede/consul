@@ -1,8 +1,7 @@
-# Use Ruby 2.5.8 as base image
-FROM ruby:2.5.8
+# Use Ruby 2.4.9 as base image
+FROM ruby:2.4.9
 
 ENV DEBIAN_FRONTEND noninteractive
-ENV RAILS_ENV production
 
 # Install essential Linux packages
 RUN apt-get update -qq
@@ -37,7 +36,7 @@ COPY Gemfile.lock Gemfile.lock
 COPY Gemfile_custom Gemfile_custom
 
 # Prevent bundler warnings; ensure that the bundler version executed is >= that which created Gemfile.lock
-RUN gem install bundler -v 2.2.21
+RUN gem install bundler
 
 # Finish establishing our Ruby environment
 RUN bundle install --full-index
@@ -47,29 +46,6 @@ RUN apt-get update -qq && apt-get install -y chromium
 
 # Copy the Rails application into place
 COPY . .
-
-ENV SECRET_KEY_BASE placeholder
-ENV SENDGRID_API_KEY placeholder
-ENV SERVER_NAME placeholder
-ENV UPLOADS_S3_BUCKET placeholder
-ENV UPLOADS_S3_REGION placeholder
-ENV SMTP_HOSTNAME placeholder
-ENV SMTP_USERNAME placeholder
-ENV SMTP_PASSWORD placeholder
-ENV FQDN placeholder
-ENV DOMAINPREFIX ""
-ENV UPLOADS_CDN_DOMAIN placeholder
-
-# Set the theme that will be used for the compiled assets in the next step.
-ARG THEME=
-ENV THEME ${THEME}
-
-# Compiling!
-RUN bundle exec rails assets:precompile
-
-# RUN ln -sf /dev/stdout /var/www/consul/log/preproduction.log; \
-#     ln -sf /dev/stdout /var/www/consul/log/production.log; \
-#     ln -sf /dev/stdout /var/www/consul/log/staging.log
 
 # Define the script we want run once the container boots
 # Use the "exec" form of CMD so our script shuts down gracefully on SIGTERM (i.e. `docker stop`)

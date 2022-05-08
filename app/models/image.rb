@@ -4,7 +4,7 @@ class Image < ApplicationRecord
 
   has_attached_file :attachment, styles: { large: "x475", medium: "300x300#", thumb: "140x245#" },
                                  url: "/system/:class/:prefix/:style/:hash.:extension",
-                                 hash_data: ":hash_data",
+                                 hash_data: ":class/:style",
                                  use_timestamp: false,
                                  hash_secret: Rails.application.secrets.secret_key_base
   attr_accessor :cached_attachment
@@ -48,31 +48,12 @@ class Image < ApplicationRecord
     attachment.instance.prefix(attachment, style)
   end
 
-  Paperclip.interpolates :hash_data do |attachment, style|
-    attachment.instance.hash_data(attachment, style)
-  end
-
   def prefix(attachment, _style)
     if !attachment.instance.persisted?
       "cached_attachments/user/#{attachment.instance.user_id}"
     else
       ":attachment/:id_partition"
     end
-  end
-
-  # Returns hash data that is unique enough for an image to prevent conflicts.
-  #
-  # New records have their attachments stored in a directory scoped for the user
-  # because there is no ID of the image yet. The original filename is included
-  # in the hash to prevent conficts when the user uploads multiple images.
-  #
-  # It would be perfectly valid to include the original filename for persisted
-  # records as well, but this would break the URLs for existing images.
-  def hash_data(attachment, style)
-    interpolation_data = ":class/:style"
-    interpolation_data << ":filename" if new_record?
-
-    attachment.interpolator.interpolate(interpolation_data, attachment, style)
   end
 
   private

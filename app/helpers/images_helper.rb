@@ -5,7 +5,7 @@ module ImagesHelper
     if Paperclip::Attachment.default_options[:storage] == :filesystem
       URI(request.url) + image.attachment.url(version)
     else
-      image.attachment.url(version)
+      investment.image_url(version)
     end
   end
 
