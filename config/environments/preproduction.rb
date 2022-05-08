@@ -48,7 +48,7 @@ Rails.application.configure do
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   # Configure force_ssl in secrets.yml
-  config.force_ssl = false
+  config.force_ssl = Rails.application.secrets.force_ssl
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
