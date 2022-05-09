@@ -638,3 +638,14 @@ body .top-bar-title {
     }
   }
 }
+
+.budget-phases {
+
+  .budget-prev-phase,
+  .budget-next-phase,
+  .budget-prev-phase-disabled,
+  .budget-next-phase-disabled {
+    display: inline-block;
+    margin-bottom: rem-calc(36);
+  }
+}
