@@ -25,7 +25,17 @@
 // This expands upon styles in base.scss,
 // which expands upon styles in layout.scss
 
-@import "custom/headers";
+body .top-bar-title {
+  background: #fff;
+
+  &::before {
+    background: #fff;
+  }
+}
+
+.footer-image {
+  display: none;
+}
 
 .input-group-button {
   button,
@@ -1554,6 +1564,14 @@ footer {
   }
 }
 
+.debate .panel h3 a {
+  color: $brand-light;
+
+  &:hover {
+    color: $brand;
+  }
+}
+
 .draft-panels .comments-on .calc-comments .comment-box {
   background: #fff;
   border: 0;
@@ -2513,4 +2531,40 @@ h4, .h4,
 h5, .h5,
 h6, .h6 {
   font-family: inherit !important;
+}
+
+// Remove this section after upgrade to 1.4.1
+
+.debate-new .header,
+.proposal-form .header,
+.budget-investment-new .header {
+  h1, h2 {
+    @include breakpoint(medium) {
+      padding-right: rem-calc(200);
+    }
+
+    @include breakpoint(large) {
+      padding-right: rem-calc(240);
+    }
+  }
+
+  @include breakpoint(large) {
+    .header-icon ~ h1, .header-icon ~ h2 {
+      padding-right: rem-calc(360);
+    }
+
+    .header-icon, &.header-single-heading .header-icon {
+      top: calc(50% - #{rem-calc(30)});
+    }
+  }
+
+
+  @include breakpoint(medium) {
+    &.header-single-heading::after, &::after {
+      padding-top: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+  }
 }
