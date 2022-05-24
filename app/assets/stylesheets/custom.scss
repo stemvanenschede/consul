@@ -451,6 +451,20 @@ body .top-bar-title {
   word-break: break-word;
 }
 
+.draft-panels {
+
+  .draft-chooser span {
+    display: block;
+  }
+
+  .comments-on .calc-comments .comment-box .comment .comment-text p {
+
+    &:last-child {
+      margin-bottom: $line-height;
+    }
+  }
+}
+
 // 6. Comments
 // --------------------
 
