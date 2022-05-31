@@ -4,7 +4,7 @@
   </td>
   <td>
     <% if can? :update, budget_investment %>
-      <%= link_to t("budgets.investments.show.edit"), edit_budget_investment_path(budget_investment.budget, budget_investment),
+      <%= link_to t("shared.edit"), edit_budget_investment_path(budget_investment.budget, budget_investment),
                   class: "button hollow" %>
     <% else %>
       <%= t("shared.expired") %>

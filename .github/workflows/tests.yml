@@ -1,4 +1,4 @@
-name: Test suite
+name: tests
 on:
   push:
     branches:
@@ -8,8 +8,9 @@ on:
       - i18n_master
 
 jobs:
-  test:
+  tests:
     runs-on: ubuntu-18.04
+    timeout-minutes: 60
     services:
       postgres:
         image: postgres:10.10
@@ -19,10 +20,18 @@ jobs:
           POSTGRES_USER: consul
           POSTGRES_PASSWORD: ""
     env:
+      CI_BUILD_NUMBER: ${{ github.run_number }}
+      COVERALLS_FLAG_NAME: run-${{ matrix.ci_node_index }}
+      COVERALLS_PARALLEL: true
+      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
       PGUSER: consul
       POSTGRES_HOST: postgres
       RAILS_ENV: test
-      COVERALLS: true
+    strategy:
+      fail-fast: false
+      matrix:
+        ci_node_total: [5]
+        ci_node_index: [0, 1, 2, 3, 4]
     steps:
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
@@ -37,4 +46,22 @@ jobs:
       - name: Compile assets
         run: bundle exec rake assets:precompile > /dev/null 2>&1
       - name: Run test suite
-        run: bin/rspec
+        env:
+          CI_NODE_TOTAL: ${{ matrix.ci_node_total }}
+          CI_NODE_INDEX: ${{ matrix.ci_node_index }}
+        run: bundle exec rake knapsack:rspec
+      - name: Upload screenshots
+        if: failure()
+        uses: actions/upload-artifact@v2
+        with:
+          name: screenshots
+          path: tmp/screenshots
+  coveralls:
+    runs-on: ubuntu-18.04
+    needs: tests
+    env:
+      CI_BUILD_NUMBER: ${{ github.run_number }}
+      COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
+    steps:
+      - name: Finish coveralls
+        run: curl -k https://coveralls.io/webhook?repo_token=$COVERALLS_REPO_TOKEN -d "payload[build_num]=$CI_BUILD_NUMBER&payload[status]=done"

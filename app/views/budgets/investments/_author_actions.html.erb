@@ -1,7 +1,7 @@
 <% if can?(:edit, investment) %>
   <div class="sidebar-divider"></div>
   <h2><%= t("budgets.investments.show.author") %></h2>
-  <%= link_to t("budgets.investments.show.edit"),
+  <%= link_to t("shared.edit"),
               edit_budget_investment_path(investment.budget, investment),
               method: :get, class: "button hollow expanded" %>
 <% end %>
