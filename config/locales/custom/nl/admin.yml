@@ -15,7 +15,7 @@ nl:
       edit: "Bewerk"
       configure: "Configureren"
       delete: "Verwijder"
-      confirm_delete: "Weet je zeker dat je %{resource_name} '%{name}' wilt verwijderen? Dit kan niet ongedaan worden gemaakt."
+      confirm_delete: "Weet je zeker dat je \"%{name}\" wilt verwijderen? Dit kan niet ongedaan worden gemaakt."
       confirm_hide_content: "Weet je dit zeker? Deze actie verbergt deze content. Je kunt deze actie niet ongedaan maken."
       confirm_hide_author: "Weet je dit zeker? Deze actie verbergt alle content van deze auteur. Ook zal de auteur geblokkeerd worden en niet meer kunnen inloggen. Je kan deze actie niet ongedaan maken."
       confirm_mark_featured: "Weet je dit zeker? Deze actie markeert deze discussie als uitgelicht. Hierdoor wordt het vastgepind aan de bovenkant van de discussie-pagina."
@@ -118,7 +118,7 @@ nl:
           open: "Actief"
           finished: "Afgesloten"
         delete: "Verwijderen"
-        help_block: "Dankzij begrotingen kunnen de burgers rechtstreeks voorstellen doen en beslissen hoe zij een deel van de begroting willen besteden, waarbij de gemeente toezicht houdt op de voorstellen en deze streng evalueert."
+        help: "Bij een burgerbegroting kunnen inwoners direct beslissen wat er met geld van de gemeente gebeurt. De gemeente monitort en evalueert de ideeën."
         type_single: "Enkele rubriek"
         type_multiple: "Meerdere rubrieken"
       new:
@@ -183,7 +183,7 @@ nl:
         main_call_to_action_description: "Deze knop verschijnt op de voorpagina van deze begroting. Een call to action moedigt de gebruiker aan om iets te doen, zoals een idee indienen, stemmen of meer leren over het proces."
         name_help_text: "Dit is de titel van de fase die gebruikers zullen zien in de header wanneer de fase actief is."
       index:
-        help_block: "Een burgerbegroting bestaat uit verschillende fases. Hier kun je fases aan-en uitzetten en iedere fase aanpassen."
+        help: "Een burgerbegroting bestaat uit verschillende fasen. Hieronder kun je fases aan- of uitzetten en vullen met content."
         button:
           continue: "Voltooien"
     budget_groups:
@@ -234,6 +234,7 @@ nl:
         recounts_tab: "Hertellingen"
         results_tab: "Resultaten"
         table_title: "Titel"
+        no_questions: "Deze peiling bevat (nog) geen vragen."
       edit:
         title: "Peiling bewerken"
         submit_button: "Opslaan"

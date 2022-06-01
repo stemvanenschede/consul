@@ -195,6 +195,9 @@ nl:
       started: "In uitvoering"
       unfeasible: "Onhaalbaar"
       done: "Gerealiseerd"
+    share:
+      improve_it: "Voer campagne om meer steun te krijgen."
+      dashboard: "Naar campagnepagina"
   polls:
     question: "Vraag"
     index:
@@ -340,7 +343,7 @@ nl:
     feed:
       description:
         proposals: "Voorstellen die genoeg steun ontvangen gaan door naar de stem fase. Zo kunnen alle inwoners van stad bepalen hoe de gemeente eruit komt te zien."
-        budgets: "Ideeën zijn processen waarbij burgers bepalen wat er met een deel van de begroting gebeurt. We onderzoeken of de meest gesteunde ideeën haalbaar zijn. In de stem fase die daarop volgt beslissen de burgers welke ideeën we gaan uitvoeren."
+        budgets: "Geef aan wat volgens jou de belangrijkste ideeën zijn."
       most_active:
         debates: "Actieve discussies"
         proposals: "Initiatieven"
@@ -506,6 +509,9 @@ nl:
     info_sign_in: "Inloggen via sociale media"
     info_sign_up: "Registreren via sociale media"
     or_fill: "Of vul het formulier in"
+    info:
+      sign_in: "Aanmelden met:"
+      sign_up: "Registreer met:"
   stats:
     index:
       comments: "Reacties"
