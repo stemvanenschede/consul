@@ -46,7 +46,7 @@ class Admin::Budgets::ActionsComponent < ApplicationComponent
              text: t("admin.budgets.edit.delete"),
              method: :delete,
              confirm: t("admin.budgets.actions.confirm.destroy"),
-             disabled: budget.investments.any? || budget.poll)
+             disabled: budget.investments.any?)
     end
 
     def destroy_hint

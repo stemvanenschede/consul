@@ -128,6 +128,10 @@ body .top-bar-title {
 
   .subnavigation {
 
+    @include breakpoint(small only) {
+      padding: $line-height / 2 0;
+    }
+
     .menu > li {
 
       a,
@@ -163,10 +167,34 @@ body .top-bar-title {
 
   .dropdown.menu > li {
 
-    &.is-dropdown-submenu-parent {
+    a {
+      padding-left: $line-height / 2;
+      padding-right: $line-height;
+    }
 
-      > a::before {
+    &.opens-left > .is-dropdown-submenu {
+
+      @include breakpoint(small only) {
+        width: 100%;
+      }
+    }
+
+    &.is-dropdown-submenu-parent > a {
+
+      &::before {
+        border-color: #fff transparent transparent;
         right: 5px;
+        top: 20px;
+
+        @include breakpoint(small only) {
+          left: 70px;
+          right: auto;
+          top: 10px;
+        }
+      }
+
+      &::after {
+        content: none;
       }
     }
 
@@ -174,13 +202,12 @@ body .top-bar-title {
       color: #fff;
     }
 
-    &.is-active .submenu a {
-      color: $brand;
-    }
+    .is-dropdown-submenu-item a {
+      color: $text;
 
-    a {
-      padding-left: $line-height / 2;
-      padding-right: $line-height;
+      &:hover {
+        color: $text;
+      }
     }
   }
 }
@@ -324,6 +351,39 @@ body .top-bar-title {
 
 .budget-phases {
 
+  .tabs-title {
+
+    &.current-phase-tab [aria-selected="true"] {
+      background: $brand;
+
+      &::after {
+        border-left-color: $brand;
+      }
+    }
+  }
+
+  .phase-title {
+
+    &.current-phase-tab a {
+      background: $brand-light;
+    }
+  }
+
+  .phase-title.current-phase-tab a {
+
+    &::after {
+      border-left-color: $brand-light;
+    }
+  }
+
+  .tabs .tabs-title > a[aria-selected="true"],
+  .tabs .tabs-title > a .is-active {
+
+    &::after {
+      border-bottom: 84px solid transparent;
+    }
+  }
+
   .tabs-title > a {
 
     &:hover {
@@ -393,7 +453,6 @@ body .top-bar-title {
 .groups-and-headings .heading {
 
   a {
-    border: 2px solid $border;
     border-radius: rem-calc(6);
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
     color: $brand;
@@ -463,6 +522,11 @@ body .top-bar-title {
       margin-bottom: $line-height;
     }
   }
+}
+
+.legislation-title {
+  margin-bottom: 0;
+  margin-top: $line-height;
 }
 
 // 6. Comments
