@@ -347,7 +347,6 @@ nl:
       selected_investment_authors: "Indieners geselecteerde ideeën huidige burgerbegroting"
       winner_investment_authors: "Indieners winnende ideeën huidige burgerbegroting"
       not_supported_on_current_budget: "Gebruikers die geen initiatieven hebben gesteund in huidige burgerbegroting"
-      beta_testers: "Beta testers"
     system_emails:
       budget_investment_created:
         title: "Idee burgerbegroting ingediend"

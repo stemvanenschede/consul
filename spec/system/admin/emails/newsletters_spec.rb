@@ -194,9 +194,6 @@ describe "Admin newsletter emails", :admin do
   end
 
   scenario "Select list of users to send newsletter" do
-    beta_testers_emails = "tester_1@mail.com,tester_2@mail.com,tester_3@mail.com"
-    allow(Rails.application.secrets).to receive(:beta_testers_emails).and_return(beta_testers_emails)
-
     UserSegments::SEGMENTS.each do |user_segment|
       visit new_admin_newsletter_path
 
