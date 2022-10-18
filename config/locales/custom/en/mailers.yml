@@ -7,5 +7,3 @@ en:
       contact: Do you have any questions or do you want help with your idea? Mail to %{email}, we'd be happy to think along with you.
     direct_message_for_receiver:
       title: You've received a new private message.
-    comment:
-      new_comment_by_html: "There is a new reaction to your idea."

@@ -2,14 +2,14 @@
   <div class="row">
     <div class="small-12 column footer-image">
       <h1>
-        <%= image_tag(image_path_for("logo_header.png"), alt: setting["org_name"]) %>
+        <%= image_tag(image_path_for("logo_header.png"), alt: Setting["org_name"]) %>
       </h1>
     </div>
   </div>
 
   <div class="row">
     <div class="small-12 medium-5 column">
-      <h2 class="footer-title"><%= setting["org_name"] %></h2>
+      <h2 class="footer-title"><%= Setting["org_name"] %></h2>
 
       <p class="info">
         <%= sanitize(content_block("footer", I18n.locale)) %>
@@ -27,11 +27,13 @@
   </div>
 
   <div class="subfooter row">
-    <div class="margin subfooter-image">
-      <%= image_tag(image_path_for("bg_footer.png"), alt: "") %>
-    </div>
+    <% if feature?(:background_image_footer) %>
+      <div id="bg_footer" class="margin-bottom">
+        <%= image_tag(image_path_for("bg_footer.png"), alt: "") %>
+      </div>
+    <% end %>
 
-    &copy; <%= t("layouts.footer.copyright", version: "1.3.1", year: Time.current.year) %>
+    &copy; <%= t("layouts.footer.copyright", version: "1.4.1", year: Time.current.year) %>
     <ul class="no-bullet">
       <li><%= link_to t("layouts.footer.privacy"), page_path("privacy") %>&nbsp;|</li>
       <li><%= link_to t("layouts.footer.conditions"), page_path("conditions") %>&nbsp;|</li>

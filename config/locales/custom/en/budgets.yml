@@ -1,8 +1,6 @@
 en:
   budgets:
     investments:
-      investment:
-        remove_support: "Remove your support"
       new:
         recommendations_title: "Describe the idea. Think for example of:"
         recommendation_one: "Why is it a good idea?"

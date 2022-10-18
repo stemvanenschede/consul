@@ -1,4 +1,4 @@
-<div class="home-page-steps">
+<div id="home_page_steps" class="home-page-steps">
   <div class="row text-center">
     <div class="small-12 column">
       <h2><%= t("welcome.steps.title") %></h2>
@@ -18,10 +18,7 @@
       <span class="number"><%= t("welcome.steps.step_2.number") %></span>
       <h3><%= t("welcome.steps.step_2.title") %></h3>
       <p><%= t("welcome.steps.step_2.description") %></p>
-
-      <% if feature?(:budgets) %>
-        <%= link_to t("welcome.steps.step_2.link"), budgets_path, data: { smooth_scroll: true } %>
-      <% end %>
+      <%= link_to t("welcome.steps.step_2.link"), budgets_path, data: { smooth_scroll: true } %>
     </div>
 
     <div class="small-12 medium-4 column step">

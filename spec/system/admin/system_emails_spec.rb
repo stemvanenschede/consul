@@ -36,8 +36,10 @@ describe "System Emails" do
           within("##{email_id}") do
             expect(page).to have_link("Preview Pending",
                                       href: admin_system_email_preview_pending_path(email_id))
-            expect(page).to have_link("Send pending",
-                                      href: admin_system_email_send_pending_path(email_id))
+
+            within "form[action='#{admin_system_email_send_pending_path(email_id)}']" do
+              expect(page).to have_button "Send pending"
+            end
 
             expect(page).not_to have_content "You can edit this email in"
             expect(page).not_to have_content "app/views/mailer/#{email_id}.html.erb"
@@ -57,7 +59,7 @@ describe "System Emails" do
             expect(page).to have_content "app/views/mailer/#{email_id}.html.erb"
 
             expect(page).not_to have_link "Preview Pending"
-            expect(page).not_to have_link "Send pending"
+            expect(page).not_to have_button "Send pending"
           end
         end
       end
@@ -149,10 +151,10 @@ describe "System Emails" do
 
       expect(page).to have_content "Someone has commented on your Debate"
       expect(page).to have_content "Hi John Doe,"
-      expect(page).to have_content "There is a new reaction to your idea."
+      expect(page).to have_content "There is a new comment from #{commenter.name}"
       expect(page).to have_content comment.body
 
-      #expect(page).to have_link "Let's do...", href: debate_url(debate, host: app_host)
+      expect(page).to have_link "Let's do...", href: debate_url(debate, host: app_host)
     end
 
     scenario "#reply" do
@@ -327,7 +329,7 @@ describe "System Emails" do
 
       visit admin_system_emails_path
 
-      click_on "Send pending"
+      click_button "Send pending"
 
       email = open_last_email
       expect(email).to deliver_to(voter)

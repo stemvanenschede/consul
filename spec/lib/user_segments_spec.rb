@@ -218,22 +218,4 @@ describe UserSegments do
       expect(emails).to eq ["first@email.com", "last@email.com"]
     end
   end
-
-  describe "#beta_testers" do
-    it "returns only beta testers emails" do
-      beta_testers_emails = "tester_1@mail.com,tester_2@mail.com,tester_3@mail.com"
-      allow(Rails.application.secrets).to receive(:beta_testers_emails).and_return(beta_testers_emails)
-      user = create(:user)
-      admin = create(:administrator)
-      tester_1 = create(:user, email: "tester_1@mail.com")
-      tester_2 = create(:user, email: "tester_2@mail.com")
-      tester_3 = create(:user, email: "tester_3@mail.com")
-
-      expect(UserSegments.beta_testers).to include tester_1
-      expect(UserSegments.beta_testers).to include tester_2
-      expect(UserSegments.beta_testers).to include tester_3
-      expect(UserSegments.beta_testers).not_to include user
-      expect(UserSegments.beta_testers).not_to include admin
-    end
-  end
 end

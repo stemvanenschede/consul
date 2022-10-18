@@ -7,8 +7,7 @@ class UserSegments
                 feasible_and_undecided_investment_authors
                 selected_investment_authors
                 winner_investment_authors
-                not_supported_on_current_budget
-                beta_testers].freeze
+                not_supported_on_current_budget].freeze
 
   def self.all_users
     User.active.where.not(confirmed_at: nil)
@@ -54,14 +53,6 @@ class UserSegments
 
   def self.user_segment_emails(users_segment)
     UserSegments.send(users_segment).newsletter.order(:created_at).pluck(:email).compact
-  end
-
-  def self.beta_testers
-    if Rails.application.secrets.beta_testers_emails.present?
-      emails = Rails.application.secrets.beta_testers_emails.split(",")
-
-      User.where(email: emails)
-    end
   end
 
   private

@@ -9,7 +9,7 @@ nl:
           other: "Je hebt op <span>%{count}</span> ideeën gestemd"
         voted_info: "Je stem is bevestigd"
         voted_info_2: "Je kunt je stem altijd aanpassen tot deze fase wordt gesloten"
-        back: "Ga terug de Burgerbegroting"
+        back: "Ga terug naar ideeën"
         amount_spent: "Uitgegeven"
         amount_spent:
           knapsack: "Uitgegeven <span>%{count}</span>"
@@ -26,7 +26,7 @@ nl:
             one: "Je kan op <span>1</span> idee stemmen"
             other: "Je kan op <span>%{count}</span> ideeën stemmen"
         amount_available:
-          knapsack: "You still have <span>%{count}</span> to invest."
+          knapsack: "Je kan nog <span>%{count}</span> uitgeven."
           approval:
             zero: "Je kan nog <span>%{count}</span> stemmen uitbrengen."
             one: "Je kan nog <span>%{count}</span> stem uitbrengen."
@@ -202,7 +202,7 @@ nl:
       unselected: "Bekijk de ideeën die niet geselecteerd zijn voor de stemronde"
       unselected_title: "Ideeën die niet geselecteerd zijn voor de stemronde"
     executions:
-      heading: "Mijlpalen burgerbegroting"
+      heading: "Mijlpalen ideeën"
       heading_selection_title: "Per gebied"
       no_winner_investments: "Er zijn geen geaccepteerde ideeën"
       filters:
@@ -213,7 +213,7 @@ nl:
           all: "Alle (%{count})"
     progress_bar:
       you_have_assigned: "Je hebt"
-      assigned: "toegewezen"
+      assigned: "Uitgegeven"
       available: "Beschikbare bedrag:"
       votes:
         zero: "Je hebt op <strong>0</strong> van de <strong>%{limit}</strong> ideeën gestemd"
@@ -232,4 +232,5 @@ nl:
       page_title: "De uitslag"
       show_all_link: "Toon alle ideeën"
       hide_discarded_link: "Verberg niet gekozen ideeën"
+      heading_selection_title: "Per gebied"
     no_image_alt: "Groene omgeving in Haren"
