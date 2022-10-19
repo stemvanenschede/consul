@@ -3,7 +3,7 @@
     <figure class="figure-card">
       <div class="gradient"></div>
       <% if budget.image.present? %>
-        <%= image_tag budget.image_url(:medium), alt: budget.name %>
+        <%= image_tag budget.image.variant(:medium), alt: budget.name %>
       <% else %>
         <%= image_tag(image_path_for("budget_no_image.jpg"), alt: "") %>
       <% end %>
@@ -25,7 +25,9 @@
       <h4><%= budget.current_phase.name %></h4>
     <% end %>
 
-    <p class="dates"><%= budget.start_date.to_date %> / <%= budget.end_date.to_date %></p>
+    <p class="dates">
+      <%= budget.current_phase.starts_at.to_date %> / <%= budget.current_phase.ends_at.to_date - 1.day %>
+    </p>
     <div class="description"><%= sanitize(strip_links(budget.description)) %></div>
     <p><%= t("welcome.feed.see_budget") %></p>
   <% end %>

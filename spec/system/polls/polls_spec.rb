@@ -47,45 +47,43 @@ describe "Polls" do
     end
 
     scenario "Polls display remaining days to participate if not expired" do
-      travel_to "10/06/2020".to_date
-      create(:poll, starts_at: "01/05/2020", ends_at: "31/05/2020", name: "Expired poll")
-      create(:poll, starts_at: "01/06/2020", ends_at: "20/06/2020", name: "Active poll")
+      travel_to "10/06/2020".to_date do
+        create(:poll, starts_at: "01/05/2020", ends_at: "31/05/2020", name: "Expired poll")
+        create(:poll, starts_at: "01/06/2020", ends_at: "20/06/2020", name: "Active poll")
 
-      visit polls_path
+        visit polls_path
 
-      within(".poll") do
-        expect(page).to have_content("Remaining 11 days to participate")
+        within(".poll") do
+          expect(page).to have_content("Remaining 11 days to participate")
+        end
+
+        click_link "Expired"
+
+        within(".poll") do
+          expect(page).not_to have_content("Remaining")
+          expect(page).not_to have_content("days to participate")
+        end
       end
-
-      click_link "Expired"
-
-      within(".poll") do
-        expect(page).not_to have_content("Remaining")
-        expect(page).not_to have_content("days to participate")
-      end
-
-      travel_back
     end
 
     scenario "Polls display remaining hours to participate if not expired" do
-      travel_to "10/06/2020".to_date + 8.hours
-      create(:poll, starts_at: "01/05/2020", ends_at: "31/05/2020", name: "Expired poll")
-      create(:poll, starts_at: "01/06/2020", ends_at: "10/06/2020", name: "Active poll")
+      travel_to "10/06/2020".to_date + 8.hours do
+        create(:poll, starts_at: "01/05/2020", ends_at: "31/05/2020", name: "Expired poll")
+        create(:poll, starts_at: "01/06/2020", ends_at: "10/06/2020", name: "Active poll")
 
-      visit polls_path
+        visit polls_path
 
-      within(".poll") do
-        expect(page).to have_content("Remaining about 16 hours to participate")
+        within(".poll") do
+          expect(page).to have_content("Remaining about 16 hours to participate")
+        end
+
+        click_link "Expired"
+
+        within(".poll") do
+          expect(page).not_to have_content("Remaining")
+          expect(page).not_to have_content("days to participate")
+        end
       end
-
-      click_link "Expired"
-
-      within(".poll") do
-        expect(page).not_to have_content("Remaining")
-        expect(page).not_to have_content("days to participate")
-      end
-
-      travel_back
     end
 
     scenario "Proposal polls won't be listed" do
@@ -231,8 +229,11 @@ describe "Polls" do
       expect(page).to have_content("Question 1 #{proposal_question.title}", normalize_ws: true)
       expect(page).to have_content("Question 2 #{normal_question.title}", normalize_ws: true)
 
-      find("#poll_description_more_info").click
+      find("#read_more").click
       expect(page).to have_content(poll.description)
+
+      find("#read_less").click
+      expect(page).not_to have_content(poll.description)
     end
 
     scenario "Do not show question number in polls with one question" do
@@ -361,23 +362,35 @@ describe "Polls" do
 
     scenario "Read more button appears only in long answer descriptions" do
       question = create(:poll_question, poll: poll)
-      create(:poll_question_answer, title: "Long answer", question: question,
-             description: Faker::Lorem.characters(number: 700))
+      answer_long = create(:poll_question_answer, title: "Long answer", question: question,
+                           description: Faker::Lorem.characters(number: 700))
       create(:poll_question_answer, title: "Short answer", question: question,
              description: Faker::Lorem.characters(number: 100))
 
       visit poll_path(poll)
 
+      expect(page).to have_content "Long answer"
       expect(page).to have_content "Short answer"
-      expect(page).to have_content "Short answer"
+      expect(page).to have_css "#answer_description_#{answer_long.id}.answer-description.short"
 
       within "#poll_more_info_answers" do
         expect(page).to have_content "Read more about Long answer"
         expect(page).not_to have_content "Read more about Short answer"
       end
+
+      find("#read_more_#{answer_long.id}").click
+
+      expect(page).to have_content "Read less about Long answer"
+      expect(page).to have_css "#answer_description_#{answer_long.id}.answer-description"
+      expect(page).not_to have_css "#answer_description_#{answer_long.id}.answer-description.short"
+
+      find("#read_less_#{answer_long.id}").click
+
+      expect(page).to have_content "Read more about Long answer"
+      expect(page).to have_css "#answer_description_#{answer_long.id}.answer-description.short"
     end
 
-    scenario "Show orbit bullets only when there is more than one image" do
+    scenario "Show orbit bullets and controls only when there is more than one image" do
       poll = create(:poll)
       question = create(:poll_question, poll: poll)
       answer1 = create(:poll_question_answer, title: "Answer with one image", question: question)
@@ -389,10 +402,12 @@ describe "Polls" do
       visit poll_path(poll)
 
       within("#answer_#{answer1.id}_gallery") do
+        expect(page).not_to have_css ".orbit-controls"
         expect(page).not_to have_css "nav.orbit-bullets"
       end
 
       within("#answer_#{answer2.id}_gallery") do
+        expect(page).to have_css ".orbit-controls"
         expect(page).to have_css "nav.orbit-bullets"
       end
     end
