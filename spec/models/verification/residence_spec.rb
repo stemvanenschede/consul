@@ -66,6 +66,7 @@ describe Verification::Residence do
       end
 
       it "is valid with postal codes included in settings" do
+        skip "We do not use it"
         residence.postal_code = "28012"
         expect(residence).to be_valid
 
@@ -91,6 +92,7 @@ describe Verification::Residence do
       end
 
       it "accepts postal codes of any length" do
+        skip "We do not use it"
         Setting["postal_codes"] = "AB1 3NE,815C,38000"
 
         residence.postal_code = "AB1 3NE"
@@ -107,6 +109,7 @@ describe Verification::Residence do
       end
 
       it "does not ignore spaces inside the postal code" do
+        skip "We do not use it"
         Setting["postal_codes"] = "00001,000 05,00011"
 
         residence.postal_code = "000 05"
@@ -117,6 +120,7 @@ describe Verification::Residence do
       end
 
       it "ignores trailing spaces in both the setting and the postal codes" do
+        skip "We do not use it"
         Setting["postal_codes"] = " 00001,00002: 00005, 00011 "
 
         residence.postal_code = "  00003  "
@@ -129,6 +133,7 @@ describe Verification::Residence do
       end
 
       it "allows regular expressions" do
+        skip "We do not use it"
         Setting["postal_codes"] = "007,[A-Za-z]{2}-[0-9]{3},86"
 
         residence.postal_code = "007"
@@ -200,6 +205,7 @@ describe Verification::Residence do
       end
 
       it "allows any postal code when the setting is blank" do
+        skip "We do not use it"
         Setting["postal_codes"] = nil
         residence.postal_code = "randomthing"
 

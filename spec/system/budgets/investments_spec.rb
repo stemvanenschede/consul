@@ -124,7 +124,7 @@ describe "Budget Investments" do
     visit budget_investments_path(budget, heading_id: heading.id)
 
     within("#budget_investment_#{investment.id}") do
-      find("#image_#{investment.image.id}").click
+      find("#image").click
     end
 
     expect(page).to have_current_path(budget_investment_path(budget, id: investment.id))
