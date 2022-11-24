@@ -86,7 +86,7 @@ describe "Legislation Proposals" do
       login_as user
       visit legislation_process_proposals_path(process, random_seed: "Spoof")
 
-      expect(page).to have_content "Random"
+      expect(page).to have_content "Random".upcase
     end
   end
 
@@ -106,8 +106,8 @@ describe "Legislation Proposals" do
       visit legislation_process_proposals_path(process)
 
       expect(page).to have_link("Random")
-      expect(page).not_to have_link("Selected")
-      expect(page).to have_content("Selected")
+      expect(page).not_to have_link("Selected".upcase)
+      expect(page).to have_content("Selected".upcase)
     end
 
     scenario "defaults to random if the current process does not have selected proposals" do
@@ -117,8 +117,8 @@ describe "Legislation Proposals" do
       visit legislation_process_proposals_path(process)
 
       expect(page).to have_link("Selected")
-      expect(page).not_to have_link("Random")
-      expect(page).to have_content("Random")
+      expect(page).not_to have_link("Random".upcase)
+      expect(page).to have_content("Random".upcase)
     end
 
     scenario "filters correctly" do
@@ -149,7 +149,7 @@ describe "Legislation Proposals" do
     imageable_attach_new_file(file_fixture("clippy.jpg"))
     click_button "Create proposal"
 
-    expect(page).to have_content "Legislation proposal with image"
+    expect(page).to have_content "Legislation proposal with image".upcase
     expect(page).to have_content "Including an image on a legislation proposal"
     expect(page).to have_css "img[alt='clippy.jpg']"
   end

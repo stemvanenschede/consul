@@ -14,7 +14,7 @@ describe "Moderate debates" do
       accept_confirm("Are you sure? Hide") { click_button "Hide" }
     end
 
-    expect(find("div#debate_#{debate.id}.faded")).to have_text debate.title
+    expect(find("div#debate_#{debate.id}.faded")).to have_text debate.title.upcase
 
     login_as(citizen)
     visit debates_path

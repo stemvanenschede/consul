@@ -14,14 +14,14 @@ describe "Direct messages" do
 
     click_link "Send private message"
 
-    expect(page).to have_content "Send private message to #{receiver.name}"
+    expect(page).to have_content "Send private message to #{receiver.name}".upcase
 
     fill_in "direct_message_title", with: "Hey!"
     fill_in "direct_message_body",  with: "How are you doing?"
     click_button "Send message"
 
     expect(page).to have_content "You message has been sent successfully."
-    expect(page).to have_content "Hey!"
+    expect(page).to have_content "Hey!".upcase
     expect(page).to have_content "How are you doing?"
   end
 
@@ -102,9 +102,9 @@ describe "Direct messages" do
 
       click_link "Send private message"
 
-      expect(page).to have_content "Send private message to #{receiver.name}"
+      expect(page).to have_content "Send private message to #{receiver.name}".upcase
 
-      fill_in "direct_message_title", with: "Hey!"
+      fill_in "direct_message_title", with: "Hey!".upcase
       fill_in "direct_message_body",  with: "How are you doing?"
       click_button "Send message"
 

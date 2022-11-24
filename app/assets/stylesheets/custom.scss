@@ -18,6 +18,80 @@
 // 0. Global styles
 // --------------------
 
+@font-face {
+  font-family: "Urw din semicond";
+  font-style: normal;
+  font-weight: normal;
+  src: font-url("urwdinsemicond_regular.woff2") format("woff2"),
+       font-url("urwdinsemicond_regular.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Urw din semicond";
+  font-style: normal;
+  font-weight: bold;
+  src: font-url("urwdinsemicond_bold.woff2") format("woff2"),
+       font-url("urwdinsemicond_bold.woff") format("woff");
+}
+
+@font-face {
+  font-style: normal;
+  font-weight: normal;
+  font-family: "Sklonar";
+  src: font-url("bc_sklonar.woff2") format("woff2"),
+       font-url("bc_sklonar.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Sklonar";
+  font-style: normal;
+  font-weight: bold;
+  src: font-url("bc_sklonar_bold.woff2") format("woff2"),
+       font-url("bc_sklonar_bold.woff") format("woff");
+}
+
+.public,
+.auth-page {
+
+  body,
+  h3,
+  h4,
+  p,
+  a {
+    font-family: "Urw din semicond", "Montserrat", sans-serif !important;
+  }
+
+  h1,
+  h2 {
+    font-family: "Sklonar" !important;
+    text-transform: uppercase;
+  }
+
+  h2 {
+    color: $brand-red;
+  }
+
+  h3 {
+    font-family: "Urw din semicond" !important;
+  }
+
+  p a:not(.button) {
+    color: $brand-red;
+    text-decoration: underline;
+
+    &:hover {
+      color: #000;
+    }
+  }
+
+  li {
+
+    &::marker {
+      color: $brand-red;
+    }
+  }
+}
+
 h1,
 h2,
 h3,
@@ -54,13 +128,27 @@ body .top-bar-title {
 }
 
 .button {
-  background: $brand-light;
+  background: $brand-red;
+  border: 2px solid $brand-red;
+  border-radius: 0;
+  box-shadow: none !important;
+  color: #fff;
+  font-family: "Sklonar" !important;
   min-height: $line-height * 2;
 
   &:hover {
-    background: darken($brand-light, 20%);
-    background: $hover;
+    background: #fff;
+    border: 2px solid #000;
+    color: #000;
   }
+}
+
+.button-facebook,
+.button-google,
+.button-twitter {
+  border-bottom: 0;
+  border-right: 0;
+  border-top: 0;
 }
 
 .menu {
@@ -167,11 +255,6 @@ body .top-bar-title {
 
   .dropdown.menu > li {
 
-    a {
-      padding-left: $line-height / 2;
-      padding-right: $line-height;
-    }
-
     &.opens-left > .is-dropdown-submenu {
 
       @include breakpoint(small only) {
@@ -183,8 +266,8 @@ body .top-bar-title {
 
       &::before {
         border-color: #fff transparent transparent;
-        right: 5px;
-        top: 20px;
+        right: -5px;
+        top: 22px;
 
         @include breakpoint(small only) {
           left: 70px;
@@ -222,14 +305,14 @@ body .top-bar-title {
     @include breakpoint(large) {
       background-position: right -150px bottom 0;
       background-size: contain;
-      min-height: $line-height * 30;
+      min-height: $line-height * 10;
     }
 
     h1 {
       font-size: rem-calc(36);
 
       @include breakpoint(large) {
-        font-size: rem-calc(90);
+        font-size: rem-calc(50);
       }
     }
 
@@ -490,6 +573,10 @@ body .top-bar-title {
   .recommendations li::before {
     color: $brand-secondary;
   }
+}
+
+.budget-header a {
+  color: #fff !important;
 }
 
 // 5. Legislation

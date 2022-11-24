@@ -202,7 +202,7 @@ describe "Account" do
     scenario "are enabled by default" do
       visit account_path
 
-      expect(page).to have_content "Recommendations"
+      expect(page).to have_content "Recommendations".upcase
       expect(page).to have_field "Recommend debates to me", checked: true
       expect(page).to have_field "Recommend proposals to me", checked: true
     end
@@ -210,7 +210,7 @@ describe "Account" do
     scenario "can be disabled through 'My account' page" do
       visit account_path
 
-      expect(page).to have_content "Recommendations"
+      expect(page).to have_content "Recommendations".upcase
       expect(page).to have_field "Recommend debates to me", checked: true
       expect(page).to have_field "Recommend proposals to me", checked: true
 

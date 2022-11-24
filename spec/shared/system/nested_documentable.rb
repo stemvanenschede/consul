@@ -214,7 +214,11 @@ shared_examples "nested documentable" do |login_as_name, documentable_factory_na
 
       documentable_redirected_to_resource_show_or_navigate_to
 
-      expect(page).to have_content "Documents"
+      if path == "new_management_budget_investment_path"
+        expect(page).to have_content "Documents"
+      else
+        expect(page).to have_content "Documents".upcase
+      end
       expect(page).to have_content "empty.pdf"
 
       # Review
@@ -239,7 +243,11 @@ shared_examples "nested documentable" do |login_as_name, documentable_factory_na
 
       documentable_redirected_to_resource_show_or_navigate_to
 
-      expect(page).to have_content "Documents (#{documentable.class.max_documents_allowed})"
+      if path == "new_management_budget_investment_path"
+        expect(page).to have_content "Documents (#{documentable.class.max_documents_allowed})"
+      else
+        expect(page).to have_content "DOCUMENTS (#{documentable.class.max_documents_allowed})"
+      end
     end
 
     if path.include? "edit"

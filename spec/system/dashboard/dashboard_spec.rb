@@ -369,7 +369,7 @@ describe "Proposal's dashboard" do
     click_button "Send notification"
 
     expect(page).to have_content "Your message has been sent correctly."
-    expect(page).to have_content "Thank you for supporting my proposal"
+    expect(page).to have_content "Thank you for supporting my proposal".upcase
     expect(page).to have_content "Please share it with others!"
   end
 

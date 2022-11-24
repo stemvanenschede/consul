@@ -21,7 +21,7 @@ describe "Ballots" do
     scenario "finds ballot using budget slug" do
       visit budget_ballot_path("budget_slug")
 
-      expect(page).to have_content("You have voted one investment")
+      expect(page).to have_content("You have voted one investment".upcase)
     end
   end
 
@@ -50,8 +50,8 @@ describe "Ballots" do
       scenario "Groups" do
         visit budget_path(budget)
 
-        expect(page).to have_content "City"
-        expect(page).to have_content "Districts"
+        expect(page).to have_content "City".upcase
+        expect(page).to have_content "Districts".upcase
       end
 
       scenario "Headings" do
@@ -355,7 +355,7 @@ describe "Ballots" do
       login_as(user)
       visit budget_ballot_path(budget)
 
-      expect(page).to have_content("You have voted 5 investments")
+      expect(page).to have_content("You have voted 5 investments".upcase)
 
       within("#budget_group_#{group1.id}") do
         expect(page).to have_content "#{group1.name} - #{heading1.name}"
@@ -378,14 +378,14 @@ describe "Ballots" do
     login_as(user)
     visit budget_ballot_path(budget)
 
-    expect(page).to have_content("You have voted one investment")
+    expect(page).to have_content("You have voted one investment".upcase)
 
     within("#budget_investment_#{investment.id}") do
       click_link "Remove vote"
     end
 
     expect(page).to have_current_path(budget_ballot_path(budget))
-    expect(page).to have_content("You have voted 0 investments")
+    expect(page).to have_content("You have voted 0 investments".upcase)
   end
 
   scenario "Removing investments from ballot (sidebar)" do
@@ -435,13 +435,13 @@ describe "Ballots" do
         click_link "Submit my ballot"
       end
 
-      expect(page).to have_content("You have voted one investment")
+      expect(page).to have_content("You have voted one investment".upcase)
 
       within(".ballot-list li", text: "Sully monument") do
         click_link "Remove vote"
       end
 
-      expect(page).to have_content("You have voted 0 investments")
+      expect(page).to have_content("You have voted 0 investments".upcase)
 
       click_link "Go back"
 

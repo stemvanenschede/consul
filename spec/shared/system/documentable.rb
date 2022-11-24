@@ -67,7 +67,7 @@ shared_examples "documentable" do |documentable_factory_name, documentable_path,
         visit send(documentable_path, arguments)
 
         expect(page).to have_css("#documents")
-        expect(page).to have_content("Documents (1)")
+        expect(page).to have_content("Documents (1)".upcase)
       end
 
       scenario "Documents list increase documents number" do
@@ -76,7 +76,7 @@ shared_examples "documentable" do |documentable_factory_name, documentable_path,
         visit send(documentable_path, arguments)
 
         expect(page).to have_css("#documents")
-        expect(page).to have_content("Documents (2)")
+        expect(page).to have_content("Documents (2)".upcase)
       end
     end
 
@@ -129,7 +129,7 @@ shared_examples "documentable" do |documentable_factory_name, documentable_path,
       end
 
       within "##{ActionView::RecordIdentifier.dom_id(documentable)}" do
-        expect(page).to have_selector "h1", text: documentable.title
+        expect(page).to have_selector "h1", text: documentable.title.upcase
       end
     end
   end

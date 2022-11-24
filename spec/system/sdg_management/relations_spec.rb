@@ -453,7 +453,7 @@ describe "SDG Relations" do
         visit sdg_management_edit_legislation_process_path(process)
 
         within_window(window_opened_by { click_link "SDG help page" }) do
-          expect(page).to have_content "Sustainable Development Goals help"
+          expect(page).to have_content "Sustainable Development Goals help".upcase
         end
       end
     end

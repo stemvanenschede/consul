@@ -7,12 +7,12 @@ describe "Budget Groups" do
   context "Load" do
     scenario "finds group using budget slug and group slug" do
       visit budget_group_path("budget_slug", "group_slug")
-      expect(page).to have_content "Select a heading"
+      expect(page).to have_content "Select a heading".upcase
     end
 
     scenario "finds group using budget id and group id" do
       visit budget_group_path(budget, group)
-      expect(page).to have_content "Select a heading"
+      expect(page).to have_content "Select a heading".upcase
     end
   end
 
@@ -41,7 +41,7 @@ describe "Budget Groups" do
 
       visit budget_groups_path(budget)
 
-      expect(page).to have_content "Select a heading"
+      expect(page).to have_content "Select a heading".upcase
       expect(page).to have_link "New heading name €1,000,000"
       expect(page).to have_link "Go back", href: budget_path(budget)
     end
