@@ -30,7 +30,7 @@ describe "Home" do
 
         visit root_path
 
-        expect(page).to have_content "Recommendations that may interest you"
+        expect(page).to have_content "Recommendations that may interest you".upcase
       end
 
       scenario "Not display recommended section when feature flag recommended is not active" do
@@ -211,8 +211,7 @@ describe "Home" do
     expect(page).to have_css("link[rel=\"shortcut icon\"]", visible: :hidden)
     expect(page).to have_xpath("//link[contains(@href, \"favicon-\")]", visible: :hidden)
 
-    create(:site_customization_image, name: "favicon",
-            image: File.new("spec/fixtures/files/favicon_custom.ico"))
+    create(:site_customization_image, name: "favicon", image: fixture_file_upload("favicon_custom.ico"))
 
     visit root_path
 

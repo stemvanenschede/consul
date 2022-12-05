@@ -272,7 +272,7 @@ describe "Legislation Draft Versions" do
       visit legislation_process_draft_version_annotation_path(draft.process, draft, note)
 
       within "#comments" do
-        expect(page).to have_content "Comments (1)"
+        expect(page).to have_content "Comments (1)".upcase
         fill_in "Leave your comment", with: "My comment on annotation!"
         click_button "Publish comment"
       end
@@ -280,7 +280,7 @@ describe "Legislation Draft Versions" do
       visit legislation_process_draft_version_annotation_path(draft.process, draft, note)
 
       within "#comments" do
-        expect(page).to have_content "Comments (2)"
+        expect(page).to have_content "Comments (2)".upcase
         expect(page).to have_content "One annotation"
         expect(page).to have_content "My comment on annotation!"
       end
@@ -308,11 +308,11 @@ describe "Legislation Draft Versions" do
 
       click_link "Help"
 
-      expect(page).to have_content "CONSUL is a platform for citizen participation"
+      expect(page).to have_content "CONSUL is a platform for citizen participation".upcase
 
       go_back
 
-      expect(page).to have_content "A collaborative legislation process"
+      expect(page).to have_content "A collaborative legislation process".upcase
       expect(page).to have_css(".annotator-hl", count: 1)
     end
 
@@ -326,11 +326,11 @@ describe "Legislation Draft Versions" do
 
       click_link "Help"
 
-      expect(page).to have_content "CONSUL is a platform for citizen participation"
+      expect(page).to have_content "CONSUL is a platform for citizen participation".upcase
 
       go_back
 
-      expect(page).to have_content "A collaborative legislation process"
+      expect(page).to have_content "A collaborative legislation process".upcase
 
       click_link "Publish Comment"
       fill_in "comment[body]", with: "My interesting comment"

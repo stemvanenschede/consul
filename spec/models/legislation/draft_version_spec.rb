@@ -10,6 +10,16 @@ describe Legislation::DraftVersion do
     expect(legislation_draft_version).to be_valid
   end
 
+  it "dynamically validates the valid statuses" do
+    stub_const("#{Legislation::DraftVersion}::VALID_STATUSES", %w[custom])
+
+    legislation_draft_version.status = "custom"
+    expect(legislation_draft_version).to be_valid
+
+    legislation_draft_version.status = "published"
+    expect(legislation_draft_version).not_to be_valid
+  end
+
   it "renders the html from the markdown body field" do
     legislation_draft_version.body = body_markdown
 
@@ -23,7 +33,11 @@ describe Legislation::DraftVersion do
     <<~BODY_MARKDOWN
       # Title 1
 
+      ---
+
       Some paragraph.
+
+      > Blockquote
 
       A list:
 
@@ -37,6 +51,13 @@ describe Legislation::DraftVersion do
       # Title 2
 
       Something about this.
+
+      `code`
+
+      | Syntax | Description |
+      | ----------- | ----------- |
+      | Header | Title |
+      | Paragraph | Text |
     BODY_MARKDOWN
   end
 
@@ -44,7 +65,13 @@ describe Legislation::DraftVersion do
     <<~BODY_HTML
       <h1 id="title-1">Title 1</h1>
 
+      <hr>
+
       <p>Some paragraph.</p>
+
+      <blockquote>
+      <p>Blockquote</p>
+      </blockquote>
 
       <p>A list:</p>
 
@@ -60,6 +87,24 @@ describe Legislation::DraftVersion do
       <h1 id="title-2">Title 2</h1>
 
       <p>Something about this.</p>
+
+      <p><code>code</code></p>
+
+      <table><thead>
+      <tr>
+      <th>Syntax</th>
+      <th>Description</th>
+      </tr>
+      </thead><tbody>
+      <tr>
+      <td>Header</td>
+      <td>Title</td>
+      </tr>
+      <tr>
+      <td>Paragraph</td>
+      <td>Text</td>
+      </tr>
+      </tbody></table>
     BODY_HTML
   end
 

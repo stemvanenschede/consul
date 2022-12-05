@@ -18,13 +18,13 @@ describe "Admin hidden proposals", :admin do
     proposal = create(:proposal, :hidden)
     visit admin_hidden_proposals_path
 
-    accept_confirm { click_button "Restore" }
+    accept_confirm("Are you sure? Restore") { click_button "Restore" }
 
-    expect(page).not_to have_content(proposal.title)
+    expect(page).not_to have_content(proposal.title.upcase)
 
     visit proposal_path(proposal)
 
-    expect(page).to have_content proposal.title
+    expect(page).to have_content proposal.title.upcase
   end
 
   scenario "Confirm hide" do
@@ -83,7 +83,7 @@ describe "Admin hidden proposals", :admin do
 
     visit admin_hidden_proposals_path(filter: "with_confirmed_hide", page: 2)
 
-    accept_confirm { click_button "Restore", match: :first, exact: true }
+    accept_confirm("Are you sure? Restore") { click_button "Restore", match: :first, exact: true }
 
     expect(page).to have_current_path(/filter=with_confirmed_hide/)
     expect(page).to have_current_path(/page=2/)

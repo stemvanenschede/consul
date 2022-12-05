@@ -50,7 +50,9 @@ describe "Admin budget groups", :admin do
 
       visit admin_budget_path(budget)
 
-      accept_confirm { click_button "Delete Nowhere" }
+      accept_confirm("Are you sure? This action will delete \"Nowhere\" and can't be undone.") do
+        click_button "Delete Nowhere"
+      end
 
       expect(page).to have_content "Group deleted successfully"
       expect(page).not_to have_content "Nowhere"
@@ -62,8 +64,9 @@ describe "Admin budget groups", :admin do
 
       visit admin_budget_path(budget)
 
-      accept_confirm { click_button "Delete Everywhere" }
-
+      accept_confirm("Are you sure? This action will delete \"Everywhere\" and can't be undone.") do
+        click_button "Delete Everywhere"
+      end
       expect(page).to have_content "You cannot delete a Group that has associated headings"
       expect(page).to have_content "Everywhere"
     end
@@ -151,7 +154,7 @@ describe "Admin budget groups", :admin do
 
       visit budget_group_path(budget, id: "old-english-name")
 
-      expect(page).to have_content "Select a heading"
+      expect(page).to have_content "Select a heading".upcase
 
       visit edit_admin_budget_group_path(budget, group)
 
@@ -163,7 +166,7 @@ describe "Admin budget groups", :admin do
 
       visit budget_group_path(budget, id: "new-english-name")
 
-      expect(page).to have_content "Select a heading"
+      expect(page).to have_content "Select a heading".upcase
     end
   end
 

@@ -5,7 +5,7 @@ module Emails
 
     click_link "Send private message"
 
-    expect(page).to have_content "Send private message to #{receiver.name}"
+    expect(page).to have_content "Send private message to #{receiver.name}".upcase
 
     fill_in "direct_message_title", with: "Hey #{receiver.name}!"
     fill_in "direct_message_body",  with: "How are you doing? This is #{sender.name}"

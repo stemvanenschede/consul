@@ -90,7 +90,7 @@ describe "Tags" do
     click_button "Create Investment"
 
     expect(page).to have_content "Investment created successfully."
-    expect(page).to have_content "Build a skyscraper"
+    expect(page).to have_content "Build a skyscraper".upcase
 
     within ".tags" do
       expect(page).to have_content tag_economia.name
@@ -113,7 +113,7 @@ describe "Tags" do
     click_button "Create Investment"
 
     expect(page).to have_content "Investment created successfully."
-    expect(page).to have_content "Build a skyscraper"
+    expect(page).to have_content "Build a skyscraper".upcase
 
     within ".tags" do
       expect(page).to have_content "Education"
@@ -136,7 +136,7 @@ describe "Tags" do
     click_button "Create Investment"
 
     expect(page).to have_content "Investment created successfully."
-    expect(page).to have_content "Build a skyscraper"
+    expect(page).to have_content "Build a skyscraper".upcase
 
     within ".tags" do
       expect(page).to have_content "Education"

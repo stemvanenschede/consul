@@ -20,11 +20,11 @@ describe "Admin hidden budget investments", :admin do
 
     accept_confirm { click_button "Restore" }
 
-    expect(page).not_to have_content(investment.title)
+    expect(page).not_to have_content(investment.title.upcase)
 
     visit budget_investment_path(investment.budget, investment)
 
-    expect(page).to have_content(investment.title)
+    expect(page).to have_content(investment.title.upcase)
   end
 
   scenario "Confirm hide" do

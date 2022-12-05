@@ -13,7 +13,7 @@ describe "Localization" do
     visit root_path(locale: :es)
     visit root_path(locale: :klingon)
 
-    expect(page).to have_text("Bienvenido a CONSUL")
+    expect(page).to have_text("Bienvenido a CONSUL".upcase)
   end
 
   scenario "Changing the locale" do

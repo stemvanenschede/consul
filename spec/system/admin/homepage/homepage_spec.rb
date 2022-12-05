@@ -43,7 +43,7 @@ describe "Homepage", :admin do
       visit root_path
 
       within("#feed_proposals") do
-        expect(page).to have_content "Featured proposals"
+        expect(page).to have_content "Featured proposals".upcase
         expect(page).to have_css(".proposal", count: 1)
       end
 
@@ -64,7 +64,7 @@ describe "Homepage", :admin do
       visit root_path
 
       within("#feed_debates") do
-        expect(page).to have_content "Most active debates"
+        expect(page).to have_content "Most active debates".upcase
         expect(page).to have_css(".debate", count: 2)
       end
 
@@ -84,7 +84,7 @@ describe "Homepage", :admin do
 
       visit root_path
 
-      expect(page).to have_content "Open processes"
+      expect(page).to have_content "Open processes".upcase
       expect(page).to have_css(".legislation-process", count: 3)
     end
 
@@ -130,7 +130,56 @@ describe "Homepage", :admin do
       end
     end
 
-    xscenario "Deactivate"
+    scenario "Deactivate proposals" do
+      Setting["homepage.widgets.feeds.proposals"] = true
+      create(:proposal)
+
+      visit admin_homepage_path
+
+      within("#widget_feed_#{proposals_feed.id}") do
+        click_button "Yes"
+
+        expect(page).to have_button "No"
+      end
+
+      visit root_path
+
+      expect(page).not_to have_content "Most active proposals"
+    end
+
+    scenario "Deactivate debates" do
+      Setting["homepage.widgets.feeds.debates"] = true
+      create(:debate)
+
+      visit admin_homepage_path
+
+      within("#widget_feed_#{debates_feed.id}") do
+        click_button "Yes"
+
+        expect(page).to have_button "No"
+      end
+
+      visit root_path
+
+      expect(page).not_to have_content "Most active debates"
+    end
+
+    scenario "Deactivate processes" do
+      Setting["homepage.widgets.feeds.processes"] = true
+      create(:legislation_process)
+
+      visit admin_homepage_path
+
+      within("#widget_feed_#{processes_feed.id}") do
+        click_button "Yes"
+
+        expect(page).to have_button "No"
+      end
+
+      visit root_path
+
+      expect(page).not_to have_content "Open processes"
+    end
   end
 
   scenario "Cards" do
@@ -181,15 +230,15 @@ describe "Homepage", :admin do
       expect(page).to have_content("CONSUL Open-source software")
       expect(page).to have_content("Link text")
       expect(page).to have_content("consul.dev")
-      expect(page).not_to have_selector("h2", text: "CONSUL")
+      expect(page).not_to have_selector("h2", text: "CONSUL".upcase)
       expect(page).not_to have_selector("strong", text: "Open-source")
     end
 
     visit root_path
 
     within(".jumbo") do
-      expect(page).to have_content("Welcome!")
-      expect(page).to have_selector("h2", text: "CONSUL")
+      expect(page).to have_content("Welcome!".upcase)
+      expect(page).to have_selector("h2", text: "CONSUL".upcase)
       expect(page).to have_selector("strong", text: "Open-source software")
       expect(page).to have_link("Link text", href: "consul.dev")
     end
@@ -210,6 +259,6 @@ describe "Homepage", :admin do
     login_as(user)
     visit root_path
 
-    expect(page).to have_content("Recommendations that may interest you")
+    expect(page).to have_content("Recommendations that may interest you".upcase)
   end
 end

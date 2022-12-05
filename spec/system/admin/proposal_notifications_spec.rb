@@ -13,7 +13,7 @@ describe "Admin proposal notifications", :admin do
     proposal_notification = create(:proposal_notification, :hidden, created_at: Date.current - 5.days)
     visit admin_hidden_proposal_notifications_path
 
-    accept_confirm { click_button "Restore" }
+    accept_confirm("Are you sure? Restore") { click_button "Restore" }
 
     expect(page).not_to have_content(proposal_notification.title)
 
@@ -21,7 +21,7 @@ describe "Admin proposal notifications", :admin do
     login_as(proposal_notification.author)
     visit proposal_notification_path(proposal_notification)
 
-    expect(page).to have_content(proposal_notification.title)
+    expect(page).to have_content(proposal_notification.title.upcase)
   end
 
   scenario "Confirm hide" do
@@ -80,7 +80,7 @@ describe "Admin proposal notifications", :admin do
 
     visit admin_hidden_proposal_notifications_path(filter: "with_confirmed_hide", page: 2)
 
-    accept_confirm { click_button "Restore", match: :first, exact: true }
+    accept_confirm("Are you sure? Restore") { click_button "Restore", match: :first, exact: true }
 
     expect(page).to have_current_path(/filter=with_confirmed_hide/)
     expect(page).to have_current_path(/page=2/)

@@ -132,7 +132,7 @@ describe "Proposals" do
 
     visit proposal_path(proposal)
 
-    expect(page).to have_content proposal.title
+    expect(page).to have_content proposal.title.upcase
     expect(page).to have_content proposal.code
     expect(page).to have_content "Proposal description"
     expect(page).to have_content proposal.author.name
@@ -230,7 +230,7 @@ describe "Proposals" do
       visit proposal_path(proposal)
       click_link "Help"
 
-      expect(page).to have_content "CONSUL is a platform for citizen participation"
+      expect(page).to have_content "CONSUL is a platform for citizen participation".upcase
 
       go_back
 
@@ -359,7 +359,7 @@ describe "Proposals" do
     click_button "Create proposal"
 
     expect(page).to have_content "Proposal created successfully."
-    expect(page).to have_content "Help refugees"
+    expect(page).to have_content "Help refugees".upcase
     expect(page).not_to have_content "You can also see more information about improving your campaign"
 
     click_link "No, I want to publish the proposal"
@@ -590,8 +590,8 @@ describe "Proposals" do
     end
   end
 
-  context "Retired proposals" do
-    scenario "Retire" do
+  context "Withdrawn proposals" do
+    scenario "Withdraw" do
       proposal = create(:proposal)
       login_as(proposal.author)
 
@@ -604,21 +604,21 @@ describe "Proposals" do
         click_link "Edit my proposal"
       end
 
-      within_window(window_opened_by { click_link "Retire proposal" }) do
+      within_window(window_opened_by { click_link "Withdraw proposal" }) do
         expect(page).to have_current_path(retire_form_proposal_path(proposal))
 
         select "Duplicated", from: "proposal_retired_reason"
         fill_in "Explanation", with: "There are three other better proposals with the same subject"
-        click_button "Retire proposal"
+        click_button "Withdraw proposal"
 
-        expect(page).to have_content "Proposal retired"
+        expect(page).to have_content "The proposal has been withdrawn"
       end
 
       visit proposal_path(proposal)
 
-      expect(page).to have_content proposal.title
-      expect(page).to have_content "Proposal retired by the author"
-      expect(page).to have_content "Duplicated"
+      expect(page).to have_content proposal.title.upcase
+      expect(page).to have_content "Proposal withdrawn by the author".upcase
+      expect(page).to have_content "Duplicated".upcase
       expect(page).to have_content "There are three other better proposals with the same subject"
     end
 
@@ -628,13 +628,13 @@ describe "Proposals" do
 
       visit retire_form_proposal_path(proposal)
 
-      click_button "Retire proposal"
+      click_button "Withdraw proposal"
 
-      expect(page).not_to have_content "Proposal retired"
+      expect(page).not_to have_content "The proposal has been withdrawn"
       expect(page).to have_content "can't be blank", count: 2
     end
 
-    scenario "Index do not list retired proposals by default" do
+    scenario "Index does not list withdrawn proposals by default" do
       Setting["feature.featured_proposals"] = true
       create_featured_proposals
       not_retired = create(:proposal)
@@ -649,63 +649,20 @@ describe "Proposals" do
       end
     end
 
-    scenario "Index has a link to retired proposals list" do
+    scenario "Index has a link to the list of withdrawn proposals" do
       not_retired = create(:proposal)
       retired = create(:proposal, :retired)
 
       visit proposals_path
 
       expect(page).not_to have_content retired.title
-      click_link "Proposals retired by the author"
+      click_link "Proposals withdrawn by the author"
 
       expect(page).to have_content retired.title
       expect(page).not_to have_content not_retired.title
     end
 
-    scenario "Index sidebar only show links with proposals" do
-      visit proposals_path
-
-      within("aside") do
-        expect(page).not_to have_link "View selected proposals"
-        expect(page).not_to have_link "Archived proposals"
-        expect(page).not_to have_link "Proposals retired by the author"
-      end
-
-      create(:proposal, :selected)
-      create(:proposal, :retired)
-      create(:proposal, :archived)
-
-      visit proposals_path
-
-      within("aside") do
-        expect(page).to have_link "View selected proposals"
-        expect(page).to have_link "Archived proposals"
-        expect(page).to have_link "Proposals retired by the author"
-      end
-    end
-
-    scenario "Tags cloud sidebar only show with tags" do
-      visit proposals_path
-
-      within("aside") do
-        expect(page).not_to have_content "TRENDING"
-      end
-
-      create(:proposal, tag_list: "participation")
-      create(:proposal, tag_list: "city")
-      create(:proposal, tag_list: "world")
-
-      visit proposals_path
-
-      within("aside") do
-        expect(page).to have_content "TRENDING"
-        expect(page).to have_link "participation"
-        expect(page).to have_link "city"
-        expect(page).to have_link "world"
-      end
-    end
-
-    scenario "Retired proposals index interface elements" do
+    scenario "Withdrawn proposals index interface elements" do
       visit proposals_path(retired: "all")
 
       expect(page).not_to have_content "Advanced search"
@@ -713,7 +670,7 @@ describe "Proposals" do
       expect(page).not_to have_content "Districts"
     end
 
-    scenario "Retired proposals index has links to filter by retired_reason" do
+    scenario "Withdrawn proposals index has links to filter by retired_reason" do
       unfeasible = create(:proposal, :retired, retired_reason: "unfeasible")
       duplicated = create(:proposal, :retired, retired_reason: "duplicated")
 
@@ -789,7 +746,7 @@ describe "Proposals" do
 
     expect(page).to have_content "Proposal updated successfully."
     expect(page).to have_content "Basically..."
-    expect(page).to have_content "End child poverty"
+    expect(page).to have_content "End child poverty".upcase
     expect(page).to have_content "Let's do something to end child poverty"
   end
 
@@ -829,7 +786,7 @@ describe "Proposals" do
 
       visit proposals_path
       click_link "Highest rated"
-      expect(page).to have_selector("a.is-active", text: "Highest rated")
+      expect(page).to have_selector("a.is-active", text: "Highest rated".upcase)
 
       within "#proposals" do
         expect(best_proposal.title).to appear_before(medium_proposal.title)
@@ -847,7 +804,7 @@ describe "Proposals" do
 
       visit proposals_path
       click_link "Newest"
-      expect(page).to have_selector("a.is-active", text: "Newest")
+      expect(page).to have_selector("a.is-active", text: "Newest".upcase)
 
       within "#proposals" do
         expect(best_proposal.title).to appear_before(medium_proposal.title)
@@ -914,7 +871,7 @@ describe "Proposals" do
 
         click_link "Recommendations"
 
-        expect(page).to have_selector("a.is-active", text: "Recommendations")
+        expect(page).to have_selector("a.is-active", text: "Recommendations".upcase)
 
         within "#proposals-list" do
           expect(best_proposal.title).to appear_before(medium_proposal.title)
@@ -1215,7 +1172,7 @@ describe "Proposals" do
       fill_in "search", with: "Title content"
       click_button "Search"
 
-      expect(page).to have_selector("a.is-active", text: "Relevance")
+      expect(page).to have_selector("a.is-active", text: "Relevance".upcase)
 
       within("#proposals") do
         expect(all(".proposal")[0].text).to match "Title content"
@@ -1234,11 +1191,11 @@ describe "Proposals" do
       fill_in "search", with: "Show what you got"
       click_button "Search"
 
-      expect(page).to have_content "Search results"
+      expect(page).to have_content "Search results".upcase
 
       click_link "Newest"
 
-      expect(page).to have_selector("a.is-active", text: "Newest")
+      expect(page).to have_selector("a.is-active", text: "Newest".upcase)
 
       within("#proposals") do
         expect(all(".proposal")[0].text).to match "Show you got"
@@ -1262,7 +1219,7 @@ describe "Proposals" do
       fill_in "search", with: "Show you got"
       click_button "Search"
       click_link "Recommendations"
-      expect(page).to have_selector("a.is-active", text: "Recommendations")
+      expect(page).to have_selector("a.is-active", text: "Recommendations".upcase)
 
       within("#proposals") do
         expect(all(".proposal")[0].text).to match "Show you got"
@@ -1506,12 +1463,12 @@ describe "Proposals" do
       click_link "The most supported proposals by category"
 
       within("#culture") do
-        expect(page).to have_content("Culture")
+        expect(page).to have_content("Culture".upcase)
         expect(page).to have_css(".proposal", count: 3)
       end
 
       within("#social-services") do
-        expect(page).to have_content("Social Services")
+        expect(page).to have_content("Social Services".upcase)
         expect(page).to have_css(".proposal", count: 3)
       end
     end
@@ -1527,12 +1484,12 @@ describe "Proposals" do
       click_link "The most supported proposals by category"
 
       within("#california") do
-        expect(page).to have_content("California")
+        expect(page).to have_content("California".upcase)
         expect(page).to have_css(".proposal", count: 3)
       end
 
       within("#new-york") do
-        expect(page).to have_content("New York")
+        expect(page).to have_content("New York".upcase)
         expect(page).to have_css(".proposal", count: 3)
       end
     end

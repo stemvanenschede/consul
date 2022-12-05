@@ -22,7 +22,7 @@ describe "Proposal Notifications" do
     click_button "Send notification"
 
     expect(page).to have_content "Your message has been sent correctly."
-    expect(page).to have_content "Thank you for supporting my proposal"
+    expect(page).to have_content "Thank you for supporting my proposal".upcase
     expect(page).to have_content "Please share it with others so we can make it happen!"
   end
 
@@ -310,15 +310,26 @@ describe "Proposal Notifications" do
       expect(page).to have_content "This resource is not available anymore"
     end
 
-    scenario "Proposal retired by author" do
+    scenario "Proposal withdrawn by its author" do
       author = create(:user)
       user = create(:user)
-      proposal = create(:proposal, author: author, voters: [user])
+      proposal = create(:proposal, :retired, author: author, followers: [user])
 
       login_as(author)
-      visit root_path
 
       visit new_proposal_notification_path(proposal_id: proposal.id)
+
+      fill_in "Title", with: "Thank you for supporting my proposal"
+      fill_in "Message", with: "Please share it with others so we can make it happen!"
+      click_button "Send notification"
+
+      expect(page).to have_content "Your message has been sent correctly."
+
+      logout
+      login_as(user)
+      visit notifications_path
+
+      expect(page).to have_content "This resource is not available anymore"
     end
 
     context "Group notifications" do

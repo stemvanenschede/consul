@@ -21,13 +21,6 @@ describe "Admin polls", :admin do
     expect(page).to have_content "List of polls"
     expect(page).to have_css ".poll", count: 3
 
-    polls = Poll.all
-    polls.each do |poll|
-      within("#poll_#{poll.id}") do
-        expect(page).to have_content poll.name
-      end
-    end
-
     expect(poll_3.name).to appear_before(poll_1.name)
     expect(poll_1.name).to appear_before(poll_2.name)
     expect(page).not_to have_content "There are no polls"
@@ -63,8 +56,8 @@ describe "Admin polls", :admin do
     fill_in "Name", with: "Upcoming poll"
     fill_in "poll_starts_at", with: start_date
     fill_in "poll_ends_at", with: end_date
-    fill_in "Summary", with: "Upcoming poll's summary. This poll..."
-    fill_in "Description", with: "Upcomming poll's description. This poll..."
+    fill_in_ckeditor "Summary", with: "Upcoming poll's summary. This poll..."
+    fill_in_ckeditor "Description", with: "Upcomming poll's description. This poll..."
 
     expect(page).not_to have_css("#poll_results_enabled")
     expect(page).not_to have_css("#poll_stats_enabled")
@@ -219,6 +212,7 @@ describe "Admin polls", :admin do
         booth.booth_assignments.each do |booth_assignment|
           3.times { create(:poll_officer_assignment, booth_assignment: booth_assignment) }
         end
+        officers = Poll::Officer.all
 
         visit admin_poll_path(poll)
 
@@ -226,7 +220,6 @@ describe "Admin polls", :admin do
 
         expect(page).to have_css ".officer", count: 3
 
-        officers = Poll::Officer.all
         officers.each do |officer|
           within("#officer_#{officer.id}") do
             expect(page).to have_content officer.name
@@ -547,8 +540,8 @@ describe "Admin polls", :admin do
       fill_in "Name", with: "Upcoming poll with SDG related content"
       fill_in "Start Date", with: 1.week.from_now
       fill_in "Closing Date", with: 2.weeks.from_now
-      fill_in "Summary", with: "Upcoming poll's summary. This poll..."
-      fill_in "Description", with: "Upcomming poll's description. This poll..."
+      fill_in_ckeditor "Summary", with: "Upcoming poll's summary. This poll..."
+      fill_in_ckeditor "Description", with: "Upcomming poll's description. This poll..."
 
       click_sdg_goal(17)
       click_button "Create poll"

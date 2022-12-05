@@ -14,7 +14,7 @@ describe "Help page" do
         click_link "Help"
       end
 
-      expect(page).to have_content("CONSUL is a platform for citizen participation")
+      expect(page).to have_content("CONSUL is a platform for citizen participation".upcase)
     end
 
     scenario "Help menu and page is hidden if feature is disabled" do

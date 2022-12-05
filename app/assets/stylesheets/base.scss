@@ -271,6 +271,26 @@ aside {
   }
 }
 
+.draft-panels {
+
+  .draft-allegation .draft-text a {
+    color: $link;
+  }
+
+  .draft-allegation .draft-text h2 {
+    margin-bottom: $line-height / 3;
+    margin-top: 0;
+  }
+
+  ul,
+  ol {
+
+    li {
+      font-size: $base-font-size;
+    }
+  }
+}
+
 .back {
 
   .icon-angle-left {
@@ -367,6 +387,13 @@ aside {
   }
 }
 
+.document-link {
+
+  .button {
+    min-height: 0;
+  }
+}
+
 .tabs {
   border-bottom: 4px solid $light;
 
@@ -374,6 +401,11 @@ aside {
     margin-bottom: 0;
 
     > a {
+
+      &:focus,
+      &[aria-selected="true"] {
+        background: transparent;
+      }
 
       &[aria-selected="true"]::after,
       .is-active::after {
@@ -662,6 +694,14 @@ body > header,
         @include breakpoint(small only) {
           display: inline;
         }
+
+        &.is-active::after {
+          border: 0;
+          height: 4px;
+          left: 0;
+          top: unset;
+          width: calc(100% + 8px);
+        }
       }
 
       > a::before {
@@ -706,8 +746,10 @@ body > header,
   }
 
   .dropdown .is-dropdown-submenu {
+    background: #fff;
     min-width: rem-calc(240);
     width: max-content;
+    z-index: 10;
 
     li {
       display: block;
@@ -971,6 +1013,7 @@ body > header,
 }
 
 .feeds-participation {
+  display: block;
 
   @include breakpoint(medium) {
 
@@ -1059,6 +1102,13 @@ footer {
       color: #fff;
     }
   }
+
+  p {
+
+    &.info {
+      font-size: $small-font-size;
+    }
+  }
 }
 
 .footer {
@@ -1099,7 +1149,7 @@ footer {
   border-top: 0;
   font-size: $small-font-size;
   margin-top: $line-height * 2;
-  padding: $line-height 0;
+  padding-top: $line-height;
 
   ul {
     padding-left: $line-height / 4;
@@ -1207,6 +1257,28 @@ footer {
   &.groups {
     min-height: 0;
     padding-top: 0;
+  }
+}
+
+.budget-header .budgets-index,
+.budget-group-show,
+.budget-groups-index,
+.budget-ballot-show {
+
+  > header {
+
+    &::before {
+      left: 0;
+      right: 0;
+    }
+  }
+}
+
+.budget-header {
+
+  &::before {
+    left: 0;
+    right: 0;
   }
 }
 
@@ -1536,6 +1608,8 @@ footer {
 }
 
 .supported .button.button-remove-support {
+  background: none;
+  border: 1px solid $brand;
   box-shadow: none;
   color: $brand-secondary;
 
@@ -1562,6 +1636,16 @@ footer {
   .budget-next-phase::before,
   .budget-next-phase-disabled::before {
     left: 52px;
+  }
+
+  .budget-phase {
+
+    @include breakpoint(medium) {
+
+      > * {
+        word-break: break-word;
+      }
+    }
   }
 }
 
@@ -1618,6 +1702,14 @@ footer {
   &::after {
     border-color: $brand-secondary;
     color: $brand-secondary;
+  }
+}
+
+.budget-ballot-show {
+  margin-top: rem-calc(-$line-height);
+
+  .back {
+    margin-top: $line-height;
   }
 }
 
@@ -2000,12 +2092,23 @@ footer {
   }
 }
 
+.draft-panels .draft-allegation {
+
+  .draft-panel {
+    color: $text;
+  }
+
+  .calc-comments .comment-box {
+    overflow: auto;
+  }
+}
+
 .draft-panels .comments-on .calc-index .draft-index-rotated {
   margin-top: $line-height * 5;
 }
 
 .legislation-list .legislation p {
-  word-break: break-all;
+  word-break: break-word;
 }
 
 // 6. Comments
@@ -2146,7 +2249,7 @@ footer {
 
   .in-favor,
   .against {
-    background: $light;
+    background: none;
     display: inline-block;
     margin-left: $line-height / 4;
     text-align: center;
@@ -2267,6 +2370,33 @@ footer {
   }
 }
 
+.legislation-draft-versions-form .markdown-preview {
+  font-family: "Montserrat", sans-serif !important;
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: "Montserrat", sans-serif !important;
+    line-height: unset;
+  }
+
+  h1 {
+    font-size: rem-calc(44);
+  }
+
+  h2 {
+    font-size: rem-calc(34);
+  }
+
+  h3 {
+    font-size: rem-calc(24);
+    margin: 0;
+  }
+}
+
 // 8. Debates
 // --------------------
 
@@ -2291,10 +2421,6 @@ footer {
 .debate .votes,
 .debate-show .votes {
   border-left: 0;
-}
-
-.debate-show .votes {
-  text-align: left;
 }
 
 .debate,
@@ -2500,6 +2626,10 @@ footer {
       }
     }
   }
+
+  .callout .small:not(.button)::after {
+    content: none;
+  }
 }
 
 .supports-container {
@@ -2615,6 +2745,17 @@ footer {
 
   &.expanded {
     word-break: break-word;
+  }
+}
+
+.proposals-list {
+
+  @include breakpoint(medium) {
+    min-height: $line-height * 15;
+
+    .with-image > .row {
+      display: flex;
+    }
   }
 }
 
@@ -2782,12 +2923,6 @@ footer {
     right: 12px;
     top: 0;
   }
-
-  .zoom-link,
-  .orbit-caption,
-  .orbit-controls {
-    display: none;
-  }
 }
 
 // 12. Users
@@ -2844,6 +2979,17 @@ footer {
 
 .verification button {
   min-height: 0;
+}
+
+.subscriptions-edit {
+
+  form {
+    max-width: none;
+  }
+
+  h2 {
+    margin-bottom: $line-height;
+  }
 }
 
 // 13. Custom
