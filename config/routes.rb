@@ -47,6 +47,7 @@ Rails.application.routes.draw do
   get "datkanbeter", to: redirect("/legislation/processes")
   get "schreurserve", to: redirect("/budgets/35")
   get "glanerbrug", to: redirect("/budgets/36")
+  get "mekdep", to: redirect("/budgets/37")
 
   # Static pages
   resources :pages, path: "/", only: [:show]
