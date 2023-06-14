@@ -29,6 +29,7 @@ nl:
           description: "Hieronder staan (een aantal) plannen waar een officiële inspraakprocedure voor is georganiseerd. Afhankelijk van het soort plan kun je opmerkingen maken op het document, discussies starten of voorstellen indienen."
         section_footer:
           title: "Hulp bij inspraak"
+          description: "We willen als gemeente zo duidelijk mogelijk communiceren. Veel van onze teksten kunnen nog een stuk beter. Met ons project Direct Duidelijk werken we aan duidelijke teksten. Wil je meer weten over Direct Duidelijk? Kijk dan op <a href=\"https://enschede.nl/directduidelijk\" target=\"_blank\">https://enschede.nl/directduidelijk</a>. Of stuur een e-mail aan: <a href=\"mailto:directduidelijk@enschede.nl\">directduidelijk@enschede.nl</a>."
       process:
         see_latest_comments: "Bekijk plan"
         see_latest_comments_title: "Bekijk plan"
