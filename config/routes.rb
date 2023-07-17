@@ -44,10 +44,12 @@ Rails.application.routes.draw do
   get "help/how-to-use",  to: "pages#show", id: "help/how_to_use/index",  as: "how_to_use"
   get "help/faq",         to: "pages#show", id: "faq",                    as: "faq"
 
+  # Custom routes
   get "datkanbeter", to: redirect("/legislation/processes")
   get "schreurserve", to: redirect("/budgets/35")
   get "glanerbrug", to: redirect("/budgets/36")
   get "mekdep", to: redirect("/budgets/37")
+  get "drienerweg", to: redirect("/budgets/40")
 
   # Static pages
   resources :pages, path: "/", only: [:show]
