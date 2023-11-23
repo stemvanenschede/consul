@@ -50,7 +50,7 @@ describe "Custom Pages" do
         visit custom_page.url
 
         expect(page).to have_title("Custom page")
-        expect(page).to have_selector("h1", text: "Custom page")
+        expect(page).to have_selector("h1", text: "Custom page".upcase)
         expect(page).to have_content("Text for new custom page")
         expect(page).not_to have_selector("h2")
         expect(page).not_to have_content("Print this info")

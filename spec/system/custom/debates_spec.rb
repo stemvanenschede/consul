@@ -55,7 +55,7 @@ describe "Debates" do
 
     click_button "Start a debate"
 
-    expect(page).to have_content "A title for a debate"
+    expect(page).to have_content "A title for a debate".upcase
     expect(page).to have_content "Debate created successfully."
     expect(page).to have_content "This is very important because..."
     expect(page).to have_content author.name
@@ -123,7 +123,7 @@ describe "Debates" do
     click_button "Start a debate"
 
     expect(page).to have_content "Debate created successfully."
-    expect(page).to have_content "Testing auto link"
+    expect(page).to have_content "Testing auto link".upcase
     expect(page).to have_link("www.example.org", href: "http://www.example.org")
   end
 
@@ -164,7 +164,7 @@ describe "Debates" do
       visit debates_path
       click_link "Highest rated"
 
-      expect(page).to have_selector("a.is-active", text: "Highest rated")
+      expect(page).to have_selector("a.is-active", text: "Highest rated".upcase)
 
       within "#debates" do
         expect(best_debate.title).to appear_before(medium_debate.title)
@@ -183,7 +183,7 @@ describe "Debates" do
       visit debates_path
       click_link "Newest"
 
-      expect(page).to have_selector("a.is-active", text: "Newest")
+      expect(page).to have_selector("a.is-active", text: "Newest".upcase)
 
       within "#debates" do
         expect(best_debate.title).to appear_before(medium_debate.title)
@@ -231,7 +231,7 @@ describe "Debates" do
 
         click_link "Recommendations"
 
-        expect(page).to have_selector("a.is-active", text: "Recommendations")
+        expect(page).to have_selector("a.is-active", text: "Recommendations".upcase)
 
         within "#debates" do
           expect(best_debate.title).to appear_before(medium_debate.title)
@@ -254,7 +254,7 @@ describe "Debates" do
       fill_in "search", with: "Show you got"
       click_button "Search"
 
-      expect(page).to have_selector("a.is-active", text: "Relevance")
+      expect(page).to have_selector("a.is-active", text: "Relevance".upcase)
 
       within("#debates") do
         expect(all(".debate")[0].text).to match "Show you got"
@@ -273,7 +273,7 @@ describe "Debates" do
       fill_in "search", with: "Show you got"
       click_button "Search"
       click_link "Newest"
-      expect(page).to have_selector("a.is-active", text: "Newest")
+      expect(page).to have_selector("a.is-active", text: "Newest".upcase)
 
       within("#debates") do
         expect(all(".debate")[0].text).to match "Show you got"
@@ -297,7 +297,7 @@ describe "Debates" do
       fill_in "search", with: "Show you got"
       click_button "Search"
       click_link "Recommendations"
-      expect(page).to have_selector("a.is-active", text: "Recommendations")
+      expect(page).to have_selector("a.is-active", text: "Recommendations".upcase)
 
       within("#debates") do
         expect(all(".debate")[0].text).to match "Show you got"

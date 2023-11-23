@@ -23,11 +23,11 @@ describe "Ballots" do
         visit budget_path(budget)
 
         within("#groups_and_headings") do
-          expect(page).to have_content "City"
+          expect(page).to have_content "City".upcase
           expect(page).to have_content "Investments Type1"
           expect(page).to have_content "Investments Type2"
 
-          expect(page).to have_content "Districts"
+          expect(page).to have_content "Districts".upcase
           expect(page).to have_link "District 1 €1,000,000"
           expect(page).to have_link "District 2 €1,000,000"
         end

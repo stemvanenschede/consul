@@ -125,11 +125,11 @@ describe "Polls" do
       proposal_question = create(:poll_question, poll: poll, proposal: create(:proposal))
 
       visit poll_path(poll)
-      expect(page).to have_content(poll.name)
+      expect(page).to have_content(poll.name.upcase)
       expect(page).to have_content(poll.summary)
 
-      expect(page).to have_content("Question 1 #{proposal_question.title}", normalize_ws: true)
-      expect(page).to have_content("Question 2 #{normal_question.title}", normalize_ws: true)
+      expect(page).to have_content("Question 1 #{proposal_question.title}")
+      expect(page).to have_content("Question 2 #{normal_question.title}")
 
       find("#read_more").click
       expect(page).to have_content(poll.description)

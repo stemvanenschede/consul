@@ -29,7 +29,7 @@ describe "Homepage", :admin do
       visit root_path
 
       within("#feed_proposals") do
-        expect(page).to have_content "Featured proposals"
+        expect(page).to have_content "Featured proposals".upcase
         expect(page).to have_css(".proposal", count: 1)
       end
 
@@ -59,12 +59,12 @@ describe "Homepage", :admin do
       visit root_path
 
       within("#feed_proposals") do
-        expect(page).to have_content "Featured proposals"
+        expect(page).to have_content "Featured proposals".upcase
         expect(page).to have_css(".proposal", count: 3)
       end
 
       within("#feed_debates") do
-        expect(page).to have_content "Most active debates"
+        expect(page).to have_content "Most active debates".upcase
         expect(page).to have_css(".debate", count: 3)
       end
     end
@@ -167,7 +167,7 @@ describe "Homepage", :admin do
     visit root_path
 
     within(".jumbo") do
-      expect(page).to have_content("Welcome!")
+      expect(page).to have_content("Welcome!".upcase)
       expect(page).to have_selector("h2", text: "CONSUL")
       expect(page).to have_selector("strong", text: "Open-source software")
       expect(page).to have_link("Link text", href: "consul.dev")

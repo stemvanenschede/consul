@@ -709,7 +709,7 @@ describe "Budget Investments" do
       click_button "Update Investment"
 
       expect(page).to have_content "Investment project updated successfully"
-      expect(page).to have_content "Park improvements"
+      expect(page).to have_content "Park improvements".upcase
     end
 
     scenario "Trigger validation errors in edit view" do

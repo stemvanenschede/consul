@@ -451,7 +451,7 @@ describe "Ballots" do
         click_link "Submit my ballot"
       end
 
-      expect(page).to have_content("You have voted 0 investments")
+      expect(page).to have_content("You have voted 0 investments".upcase)
 
       click_link "Go back"
 

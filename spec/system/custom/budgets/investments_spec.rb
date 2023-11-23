@@ -87,7 +87,7 @@ describe "Budget Investments" do
       visit new_budget_investment_path(budget)
 
       expect(page).not_to have_field "budget_investment_heading_id"
-      expect(page).to have_content("#{heading.name} (#{budget.formatted_heading_price(heading)})")
+      expect(page).to have_content("#{heading.name.upcase} (#{budget.formatted_heading_price(heading)})")
 
       fill_in "Title", with: "Build a skyscraper"
       fill_in_ckeditor "Description", with: "I want to live in a high tower over the clouds"
@@ -99,7 +99,7 @@ describe "Budget Investments" do
       click_button "Create Investment"
 
       expect(page).to have_content "Investment created successfully"
-      expect(page).to have_content "Build a skyscraper"
+      expect(page).to have_content "Build a skyscraper".upcase
       expect(page).to have_content "I want to live in a high tower over the clouds"
       expect(page).to have_content "City center"
       expect(page).to have_content "T.I.A."
@@ -107,7 +107,7 @@ describe "Budget Investments" do
 
       visit user_path(author, filter: :budget_investments)
 
-      expect(page).to have_content "1 Investment"
+      expect(page).to have_content "1 Investment".upcase
       expect(page).to have_content "Build a skyscraper"
     end
 
@@ -136,7 +136,7 @@ describe "Budget Investments" do
       click_button "Create Investment"
 
       expect(page).to have_content "Investment created successfully"
-      expect(page).to have_content "Build a skyscraper"
+      expect(page).to have_content "Build a skyscraper".upcase
       expect(page).to have_content "I want to live in a high tower over the clouds"
       expect(page).to have_content "City center"
       expect(page).to have_content "T.I.A."
@@ -144,7 +144,7 @@ describe "Budget Investments" do
 
       visit user_path(author, filter: :budget_investments)
 
-      expect(page).to have_content "1 Investment"
+      expect(page).to have_content "1 Investment".upcase
       expect(page).to have_content "Build a skyscraper"
     end
 
@@ -174,7 +174,7 @@ describe "Budget Investments" do
       click_button "Create Investment"
 
       expect(page).to have_content "Investment created successfully"
-      expect(page).to have_content "Build a skyscraper"
+      expect(page).to have_content "Build a skyscraper".upcase
       expect(page).to have_content "I want to live in a high tower over the clouds"
       expect(page).to have_content "City center"
       expect(page).to have_content "T.I.A."
@@ -182,7 +182,7 @@ describe "Budget Investments" do
 
       visit user_path(author, filter: :budget_investments)
 
-      expect(page).to have_content "1 Investment"
+      expect(page).to have_content "1 Investment".upcase
       expect(page).to have_content "Build a skyscraper"
     end
   end
@@ -195,7 +195,7 @@ describe "Budget Investments" do
 
     visit budget_investment_path(budget, id: investment.id)
 
-    expect(page).to have_content(investment.title)
+    expect(page).to have_content(investment.title.upcase)
     expect(page).to have_content(investment.description)
     expect(page).to have_content(investment.author.name)
     expect(page).to have_content(investment.comments_count)
@@ -214,12 +214,12 @@ describe "Budget Investments" do
 
     visit budget_investment_path(budget, investment)
 
-    expect(page).not_to have_content("Feasibility explanation")
+    expect(page).not_to have_content("Feasibility explanation".upcase)
     expect(page).not_to have_content("Local government is competent in this")
 
     visit budget_investment_path(budget, investment_2)
 
-    expect(page).to have_content("Feasibility explanation")
+    expect(page).to have_content("Feasibility explanation".upcase)
     expect(page).to have_content("The feasible explanation")
   end
 
