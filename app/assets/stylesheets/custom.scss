@@ -401,15 +401,12 @@ body .top-bar-title {
   background: $brand;
   padding-top: $line-height * 3;
 
-  .footer-title {
-    color: $brand-secondary;
+  a {
+    color: #fff !important;
   }
 
-  .social {
-
-    a {
-      color: #fff !important;
-    }
+  .footer-title {
+    color: $brand-secondary;
   }
 }
 

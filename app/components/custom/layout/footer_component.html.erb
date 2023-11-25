@@ -14,7 +14,7 @@
       <h2 class="footer-title"><%= Setting["org_name"] %></h2>
 
       <p class="info">
-        <%= sanitize(content_block("footer", I18n.locale)) %>
+        <%= render Layout::SocialComponent.new %>
       </p>
     </div>
 
@@ -35,11 +35,11 @@
       </div>
     <% end %>
 
-    &copy; <%= t("layouts.footer.copyright", version: "1.5.0", year: Time.current.year) %>
-    <ul class="no-bullet">
-      <li><%= link_to t("layouts.footer.privacy"), page_path("privacy") %>&nbsp;|</li>
-      <li><%= link_to t("layouts.footer.conditions"), page_path("conditions") %>&nbsp;|</li>
-      <li><%= link_to t("layouts.footer.accessibility"), page_path("accessibility") %>&nbsp;|</li>
+    <%= t("layouts.footer.copyright", version: "2.0.1", year: Time.current.year) %>
+    <ul class="no-bullet inline-block">
+      <li class="inline-block"><%= link_to t("layouts.footer.privacy"), page_path("privacy") %>&nbsp;|</li>
+      <li class="inline-block"><%= link_to t("layouts.footer.conditions"), page_path("conditions") %>&nbsp;|</li>
+      <li class="inline-block"><%= link_to t("layouts.footer.accessibility"), page_path("accessibility") %></li>
     </ul>
   </div>
 </footer>
