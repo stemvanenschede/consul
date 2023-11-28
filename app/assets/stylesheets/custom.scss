@@ -209,6 +209,31 @@ body .top-bar-title {
   }
 }
 
+.debate-show,
+.proposal-show,
+.poll-question-show,
+.budget-investment-show,
+.polls-show,
+.debate-quiz,
+.draft-panels,
+.debate-questions,
+.communities-show,
+.topic-show,
+.milestone-content {
+
+  a {
+    color: $brand-red;
+    text-decoration: underline;
+  }
+
+  ul,
+  ol {
+
+    li {
+      font-size: $base-font-size;
+    }
+  }
+}
 
 // 1. Header
 // --------------------
