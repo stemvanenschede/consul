@@ -83,13 +83,13 @@ describe "Results" do
     visit budget_results_path("wrong budget")
 
     within(".budgets-stats") do
-      expect(page).to have_content "Participatory budget results".upcase
+      expect(page).to have_content "Participatory budget results"
     end
 
     visit budget_results_path(0)
 
     within(".budgets-stats") do
-      expect(page).to have_content "Participatory budget results".upcase
+      expect(page).to have_content "Participatory budget results"
     end
   end
 

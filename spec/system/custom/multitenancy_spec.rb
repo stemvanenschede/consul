@@ -17,14 +17,14 @@ describe "Multitenancy", :seed_tenants do
 
       click_link "No, I want to publish the proposal"
 
-      expect(page).to have_content "You've created a proposal!".upcase
+      expect(page).to have_content "You've created a proposal!"
 
       visit proposals_path
       click_button "Advanced search"
       fill_in "With the text", with: "Maria the Martian"
       click_button "Filter"
 
-      expect(page).to have_content "Search results".upcase
+      expect(page).to have_content "Search results"
       expect(page).to have_content "María the Martian"
     end
   end

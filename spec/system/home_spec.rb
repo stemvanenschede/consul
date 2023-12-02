@@ -30,7 +30,7 @@ describe "Home" do
 
         visit root_path
 
-        expect(page).to have_content "Recommendations that may interest you".upcase
+        expect(page).to have_content "Recommendations that may interest you"
       end
 
       scenario "Not display recommended section when feature flag recommended is not active" do

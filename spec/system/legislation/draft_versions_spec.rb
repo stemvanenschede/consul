@@ -267,11 +267,11 @@ describe "Legislation Draft Versions" do
 
       click_link "Help"
 
-      expect(page).to have_content "CONSUL is a platform for citizen participation".upcase
+      expect(page).to have_content "CONSUL is a platform for citizen participation"
 
       go_back
 
-      expect(page).to have_content "A collaborative legislation process".upcase
+      expect(page).to have_content "A collaborative legislation process"
       expect(page).to have_css(".annotator-hl", count: 1)
     end
 
@@ -285,11 +285,11 @@ describe "Legislation Draft Versions" do
 
       click_link "Help"
 
-      expect(page).to have_content "CONSUL is a platform for citizen participation".upcase
+      expect(page).to have_content "CONSUL is a platform for citizen participation"
 
       go_back
 
-      expect(page).to have_content "A collaborative legislation process".upcase
+      expect(page).to have_content "A collaborative legislation process"
 
       click_link "Publish Comment"
       fill_in "comment[body]", with: "My interesting comment"

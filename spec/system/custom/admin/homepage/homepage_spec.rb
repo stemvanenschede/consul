@@ -14,61 +14,6 @@ describe "Homepage", :admin do
   let!(:budgets_feed)      { create(:widget_feed, kind: "budgets") }
 
   context "Feeds" do
-    scenario "Proposals" do
-      5.times { create(:proposal) }
-
-      visit admin_homepage_path
-
-      within("#widget_feed_#{proposals_feed.id}") do
-        select "1", from: "widget_feed_limit"
-        click_button "No"
-
-        expect(page).to have_button "Yes"
-      end
-
-      visit root_path
-
-      within("#feed_proposals") do
-        expect(page).to have_content "Featured proposals".upcase
-        expect(page).to have_css(".proposal", count: 1)
-      end
-
-      expect(page).not_to have_css("#feed_proposals.medium-8")
-    end
-
-    scenario "Proposals and debates" do
-      3.times { create(:proposal) }
-      3.times { create(:debate) }
-
-      visit admin_homepage_path
-
-      within("#widget_feed_#{proposals_feed.id}") do
-        select "3", from: "widget_feed_limit"
-        click_button "No"
-
-        expect(page).to have_button "Yes"
-      end
-
-      within("#widget_feed_#{debates_feed.id}") do
-        select "3", from: "widget_feed_limit"
-        click_button "No"
-
-        expect(page).to have_button "Yes"
-      end
-
-      visit root_path
-
-      within("#feed_proposals") do
-        expect(page).to have_content "Featured proposals".upcase
-        expect(page).to have_css(".proposal", count: 3)
-      end
-
-      within("#feed_debates") do
-        expect(page).to have_content "Most active debates".upcase
-        expect(page).to have_css(".debate", count: 3)
-      end
-    end
-
     scenario "Budgets" do
       5.times { create(:budget) }
 
@@ -167,7 +112,7 @@ describe "Homepage", :admin do
     visit root_path
 
     within(".jumbo") do
-      expect(page).to have_content("Welcome!".upcase)
+      expect(page).to have_content("Welcome!")
       expect(page).to have_selector("h2", text: "CONSUL")
       expect(page).to have_selector("strong", text: "Open-source software")
       expect(page).to have_link("Link text", href: "consul.dev")

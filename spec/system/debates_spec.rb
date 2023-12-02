@@ -76,7 +76,7 @@ describe "Debates" do
 
     visit debate_path(debate)
 
-    expect(page).to have_content debate.title.upcase
+    expect(page).to have_content debate.title
     expect(page).to have_content "Debate description"
     expect(page).to have_content debate.author.name
     expect(page).to have_content I18n.l(debate.created_at.to_date)
@@ -196,7 +196,7 @@ describe "Debates" do
 
     click_button "Start a debate"
 
-    expect(page).to have_content "A title for a debate".upcase
+    expect(page).to have_content "A title for a debate"
     expect(page).to have_content "Debate created successfully."
     expect(page).to have_content "This is very important because..."
     expect(page).to have_content author.name
@@ -289,7 +289,7 @@ describe "Debates" do
     click_button "Start a debate"
 
     expect(page).to have_content "Debate created successfully."
-    expect(page).to have_content "Testing auto link".upcase
+    expect(page).to have_content "Testing auto link"
     expect(page).to have_link("www.example.org", href: "http://www.example.org")
   end
 
@@ -357,7 +357,7 @@ describe "Debates" do
     click_button "Save changes"
 
     expect(page).to have_content "Debate updated successfully."
-    expect(page).to have_content "End child poverty".upcase
+    expect(page).to have_content "End child poverty"
     expect(page).to have_content "Let's do something to end child poverty"
   end
 

@@ -189,7 +189,7 @@ describe "Admin budget headings", :admin do
 
       visit budget_investments_path(budget, heading_id: "old-english-name")
 
-      expect(page).to have_content "Old English Name".upcase
+      expect(page).to have_content "Old English Name"
 
       visit edit_admin_budget_group_heading_path(budget, group, heading)
 
@@ -201,7 +201,7 @@ describe "Admin budget headings", :admin do
 
       visit budget_investments_path(budget, heading_id: "new-english-name")
 
-      expect(page).to have_content "New English Name".upcase
+      expect(page).to have_content "New English Name"
     end
   end
 

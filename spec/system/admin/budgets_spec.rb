@@ -322,7 +322,7 @@ describe "Admin budgets", :admin do
 
       visit budget_path(id: "old-english-name")
 
-      expect(page).to have_content "Old English Name".upcase
+      expect(page).to have_content "Old English Name"
 
       visit edit_admin_budget_path(budget)
 
@@ -334,7 +334,7 @@ describe "Admin budgets", :admin do
 
       visit budget_path(id: "new-english-name")
 
-      expect(page).to have_content "New English Name".upcase
+      expect(page).to have_content "New English Name"
     end
 
     scenario "Hide money active" do

@@ -21,7 +21,7 @@ describe "Ballots" do
     scenario "finds ballot using budget slug" do
       visit budget_ballot_path("budget_slug")
 
-      expect(page).to have_content("You have voted one investment".upcase)
+      expect(page).to have_content("You have voted one investment")
     end
   end
 
@@ -350,7 +350,7 @@ describe "Ballots" do
       login_as(user)
       visit budget_ballot_path(budget)
 
-      expect(page).to have_content("You have voted 5 investments".upcase)
+      expect(page).to have_content("You have voted 5 investments")
 
       within("#budget_group_#{group1.id}") do
         expect(page).to have_content "#{group1.name} - #{heading1.name}"
@@ -373,14 +373,14 @@ describe "Ballots" do
     login_as(user)
     visit budget_ballot_path(budget)
 
-    expect(page).to have_content("You have voted one investment".upcase)
+    expect(page).to have_content("You have voted one investment")
 
     within("#budget_investment_#{investment.id}") do
       click_link "Remove vote"
     end
 
     expect(page).to have_current_path(budget_ballot_path(budget))
-    expect(page).to have_content("You have voted 0 investments".upcase)
+    expect(page).to have_content("You have voted 0 investments")
   end
 
   scenario "Removing investments from ballot (sidebar)", :consul do
@@ -430,13 +430,13 @@ describe "Ballots" do
         click_link "Submit my ballot"
       end
 
-      expect(page).to have_content("You have voted one investment".upcase)
+      expect(page).to have_content("You have voted one investment")
 
       within(".ballot-list li", text: "Sully monument") do
         click_link "Remove vote"
       end
 
-      expect(page).to have_content("You have voted 0 investments".upcase)
+      expect(page).to have_content("You have voted 0 investments")
 
       click_link "Go back"
 
@@ -451,7 +451,7 @@ describe "Ballots" do
         click_link "Submit my ballot"
       end
 
-      expect(page).to have_content("You have voted 0 investments".upcase)
+      expect(page).to have_content("You have voted 0 investments")
 
       click_link "Go back"
 

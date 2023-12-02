@@ -20,11 +20,11 @@ describe "Admin hidden proposals", :admin do
 
     accept_confirm("Are you sure? Restore") { click_button "Restore" }
 
-    expect(page).not_to have_content(proposal.title.upcase)
+    expect(page).not_to have_content(proposal.title)
 
     visit proposal_path(proposal)
 
-    expect(page).to have_content proposal.title.upcase
+    expect(page).to have_content proposal.title
   end
 
   scenario "Confirm hide" do

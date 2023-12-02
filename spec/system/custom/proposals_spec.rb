@@ -75,7 +75,7 @@ describe "Proposals" do
     click_button "Create proposal"
 
     expect(page).to have_content "Proposal created successfully."
-    expect(page).to have_content "Help refugees".upcase
+    expect(page).to have_content "Help refugees"
     expect(page).not_to have_content "You can also see more information about improving your campaign"
 
     click_link "No, I want to publish the proposal"
@@ -83,7 +83,7 @@ describe "Proposals" do
     expect(page).to have_content "Improve your campaign and get more support"
     click_link "Not now, go to my proposal"
 
-    expect(page).to have_content "Help refugees".upcase
+    expect(page).to have_content "Help refugees"
     expect(page).to have_content "In summary, what we want is..."
     expect(page).to have_content "This is very important because..."
     expect(page.find(:css, "iframe")[:src]).to eq "https://www.youtube.com/embed/yPQfcG-eimk"
@@ -281,7 +281,7 @@ describe "Proposals" do
 
       visit proposals_path
       click_link "Highest rated"
-      expect(page).to have_selector("a.is-active", text: "Highest rated".upcase)
+      expect(page).to have_selector("a.is-active", text: "Highest rated")
 
       within "#proposals" do
         expect(best_proposal.title).to appear_before(medium_proposal.title)
@@ -299,7 +299,7 @@ describe "Proposals" do
 
       visit proposals_path
       click_link "Newest"
-      expect(page).to have_selector("a.is-active", text: "Newest".upcase)
+      expect(page).to have_selector("a.is-active", text: "Newest")
 
       within "#proposals" do
         expect(best_proposal.title).to appear_before(medium_proposal.title)
@@ -347,7 +347,7 @@ describe "Proposals" do
 
         click_link "Recommendations"
 
-        expect(page).to have_selector("a.is-active", text: "Recommendations".upcase)
+        expect(page).to have_selector("a.is-active", text: "Recommendations")
 
         within "#proposals-list" do
           expect(best_proposal.title).to appear_before(medium_proposal.title)
@@ -393,7 +393,7 @@ describe "Proposals" do
       fill_in "search", with: "Title content"
       click_button "Search"
 
-      expect(page).to have_selector("a.is-active", text: "Relevance".upcase)
+      expect(page).to have_selector("a.is-active", text: "Relevance")
 
       within("#proposals") do
         expect(all(".proposal")[0].text).to match "Title content"
@@ -412,11 +412,11 @@ describe "Proposals" do
       fill_in "search", with: "Show what you got"
       click_button "Search"
 
-      expect(page).to have_content "Search results".upcase
+      expect(page).to have_content "Search results"
 
       click_link "Newest"
 
-      expect(page).to have_selector("a.is-active", text: "Newest".upcase)
+      expect(page).to have_selector("a.is-active", text: "Newest")
 
       within("#proposals") do
         expect(all(".proposal")[0].text).to match "Show you got"
@@ -440,7 +440,7 @@ describe "Proposals" do
       fill_in "search", with: "Show you got"
       click_button "Search"
       click_link "Recommendations"
-      expect(page).to have_selector("a.is-active", text: "Recommendations".upcase)
+      expect(page).to have_selector("a.is-active", text: "Recommendations")
 
       within("#proposals") do
         expect(all(".proposal")[0].text).to match "Show you got"
@@ -501,7 +501,7 @@ describe "Proposals" do
 
       expect(page).to have_current_path(new_proposal_path)
 
-      fill_in_new_proposal_title with: "Help refugees".upcase
+      fill_in_new_proposal_title with: "Help refugees"
       fill_in "Proposal summary", with: "In summary what we want is..."
       fill_in_ckeditor "Proposal text", with: "This is very important because..."
       fill_in "External video URL", with: "https://www.youtube.com/watch?v=yPQfcG-eimk"

@@ -7,11 +7,11 @@ describe "Admin hidden debates", :admin do
 
     accept_confirm("Are you sure? Restore") { click_button "Restore" }
 
-    expect(page).not_to have_content(debate.title.upcase)
+    expect(page).not_to have_content(debate.title)
 
     visit debate_path(debate)
 
-    expect(page).to have_content debate.title.upcase
+    expect(page).to have_content debate.title
   end
 
   scenario "Confirm hide" do

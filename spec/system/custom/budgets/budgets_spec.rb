@@ -90,13 +90,13 @@ describe "Budgets" do
         visit budgets_path
 
         within(".budget-header") do
-          expect(page).to have_content(budget.name.upcase)
+          expect(page).to have_content(budget.name)
           expect(page).to have_link("Help with participatory budgets")
         end
 
         within(".budget-subheader") do
           expect(page).to have_content "CURRENT PHASE"
-          expect(page).to have_content "Information".upcase
+          expect(page).to have_content "Information"
         end
       end
     end
@@ -109,7 +109,7 @@ describe "Budgets" do
 
       within(".budget-subheader") do
         expect(page).to have_content("CURRENT PHASE")
-        expect(page).to have_content("Custom name for informing phase".upcase)
+        expect(page).to have_content("Custom name for informing phase")
         expect(page).not_to have_content("Information")
       end
     end
@@ -122,7 +122,7 @@ describe "Budgets" do
 
       within("#budget_info") do
         expect(page).not_to have_link heading.name
-        expect(page).to have_content "#{heading.name}\n€1,000,000".upcase
+        expect(page).to have_content "#{heading.name}\n€1,000,000"
 
         expect(page).not_to have_link("List of all investment projects")
         expect(page).not_to have_link("List of all unfeasible investment projects")
@@ -268,7 +268,7 @@ describe "Budgets" do
       login_as(voter)
       visit budget_path(budget)
 
-      expect(page).to have_content "It's time to support projects!".upcase
+      expect(page).to have_content "It's time to support projects!"
       expect(page).to have_content "So far you've supported 3 projects."
       expect(page).not_to have_link "See results"
     end
@@ -306,7 +306,7 @@ describe "Budgets" do
       visit budget_path(budget)
 
       within(".investments-list") do
-        expect(page).to have_content "List of investments".upcase
+        expect(page).to have_content "List of investments"
         expect(page).to have_content "PRICE", count: 3
       end
 
@@ -336,7 +336,7 @@ describe "Budgets" do
 
         visit budget_path(budget)
 
-        expect(page).to have_content "List of investments".upcase
+        expect(page).to have_content "List of investments"
         expect(page).not_to have_content "SUPPORTS"
         expect(page).not_to have_content "PRICE"
       end
@@ -345,7 +345,7 @@ describe "Budgets" do
 
       visit budget_path(budget)
 
-      expect(page).to have_content "List of investments".upcase
+      expect(page).to have_content "List of investments"
       expect(page).to have_content("SUPPORTS", count: 3)
       expect(page).not_to have_content "PRICE"
 
@@ -354,7 +354,7 @@ describe "Budgets" do
 
         visit budget_path(budget)
 
-        expect(page).to have_content "List of investments".upcase
+        expect(page).to have_content "List of investments"
         expect(page).to have_content("PRICE\n", count: 3)
       end
     end
@@ -388,7 +388,7 @@ describe "Budgets" do
       budget.update!(phase: "selecting")
       visit budget_path(budget)
 
-      expect(page).to have_content "It's time to support projects!".upcase
+      expect(page).to have_content "It's time to support projects!"
       expect(page).to have_content "Support the projects you would like to see move on "\
                                    "to the next phase."
       expect(page).to have_content "You may support on as many different projects as you would like."

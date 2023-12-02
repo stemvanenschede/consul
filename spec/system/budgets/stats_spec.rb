@@ -10,7 +10,7 @@ describe "Stats" do
     scenario "finds budget by slug" do
       visit budget_stats_path("budget_slug")
 
-      expect(page).to have_content budget.name.upcase
+      expect(page).to have_content budget.name
     end
   end
 

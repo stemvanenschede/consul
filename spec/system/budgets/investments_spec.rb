@@ -36,13 +36,13 @@ describe "Budget Investments" do
     scenario "finds investment using budget slug" do
       visit budget_investment_path("budget_slug", investment)
 
-      expect(page).to have_content investment.title.upcase
+      expect(page).to have_content investment.title
     end
 
     scenario "finds investment using heading slug" do
       visit budget_investment_path(budget, investment, heading_id: "heading_slug")
 
-      expect(page).to have_content investment.title.upcase
+      expect(page).to have_content investment.title
     end
   end
 
@@ -332,7 +332,7 @@ describe "Budget Investments" do
 
       visit budget_investments_path(budget, heading_id: heading.id)
 
-      within(".submenu .is-active") { expect(page).to have_content "highest rated".upcase }
+      within(".submenu .is-active") { expect(page).to have_content "highest rated" }
       order = all(".budget-investment h3").map(&:text)
       expect(order).not_to be_empty
       expect(order).to eq expected_order
@@ -352,11 +352,11 @@ describe "Budget Investments" do
 
       click_link "highest rated"
 
-      expect(page).to have_css "h2", exact_text: "highest rated".upcase
+      expect(page).to have_css "h2", exact_text: "highest rated"
 
       click_link "random"
 
-      expect(page).to have_css "h2", exact_text: "random".upcase
+      expect(page).to have_css "h2", exact_text: "random"
 
       visit budget_investments_path(budget, heading_id: heading.id)
       new_order = all(".budget-investment h3").map(&:text)
@@ -430,7 +430,7 @@ describe "Budget Investments" do
 
       visit budget_investments_path(budget, heading_id: heading.id)
       click_link "highest rated"
-      expect(page).to have_selector("a.is-active", text: "highest rated".upcase)
+      expect(page).to have_selector("a.is-active", text: "highest rated")
 
       within "#budget-investments" do
         expect(best_proposal.title).to appear_before(medium_proposal.title)
@@ -541,9 +541,9 @@ describe "Budget Investments" do
         visit budget_investments_path(budget, heading_id: heading.id, filter: "unfeasible")
 
         within(".submenu") do
-          expect(page).to have_content "random".upcase
-          expect(page).not_to have_content "by price".upcase
-          expect(page).not_to have_content "highest rated".upcase
+          expect(page).to have_content "random"
+          expect(page).not_to have_content "by price"
+          expect(page).not_to have_content "highest rated"
         end
       end
 
@@ -551,9 +551,9 @@ describe "Budget Investments" do
         visit budget_investments_path(budget, heading_id: heading.id, filter: "unselected")
 
         within(".submenu") do
-          expect(page).to have_content "random".upcase
-          expect(page).not_to have_content "price".upcase
-          expect(page).not_to have_content "highest rated".upcase
+          expect(page).to have_content "random"
+          expect(page).not_to have_content "price"
+          expect(page).not_to have_content "highest rated"
         end
       end
     end
@@ -617,7 +617,7 @@ describe "Budget Investments" do
       click_button "Create Investment"
 
       expect(page).to have_content "Investment created successfully"
-      expect(page).to have_content "Build a skyscraper".upcase
+      expect(page).to have_content "Build a skyscraper"
       expect(page).to have_content "I want to live in a high tower over the clouds"
       expect(page).to have_content "City center"
       expect(page).to have_content "T.I.A."
@@ -638,7 +638,7 @@ describe "Budget Investments" do
 
       visit new_budget_investment_path(budget_hide_money)
 
-      expect(page).to have_content "Heading without money".upcase
+      expect(page).to have_content "Heading without money"
       expect(page).not_to have_content "€"
     end
 
@@ -665,7 +665,7 @@ describe "Budget Investments" do
 
       visit new_budget_investment_path(budget)
 
-      expect(page).not_to have_content("#{heading.name.upcase} (#{budget.formatted_heading_price(heading)})")
+      expect(page).not_to have_content("#{heading.name} (#{budget.formatted_heading_price(heading)})")
       expect(page).to have_select "Heading",
         options: ["", "Health: More hospitals", "Health: Medical supplies", "Education: Schools"]
 
@@ -682,7 +682,7 @@ describe "Budget Investments" do
       click_button "Create Investment"
 
       expect(page).to have_content "Investment created successfully"
-      expect(page).to have_content "Build a skyscraper".upcase
+      expect(page).to have_content "Build a skyscraper"
       expect(page).to have_content "I want to live in a high tower over the clouds"
       expect(page).to have_content "City center"
       expect(page).to have_content "T.I.A."
@@ -690,7 +690,7 @@ describe "Budget Investments" do
 
       visit user_path(author, filter: :budget_investments)
 
-      expect(page).to have_content "1 Investment".upcase
+      expect(page).to have_content "1 Investment"
       expect(page).to have_content "Build a skyscraper"
     end
 
@@ -709,7 +709,7 @@ describe "Budget Investments" do
       click_button "Update Investment"
 
       expect(page).to have_content "Investment project updated successfully"
-      expect(page).to have_content "Park improvements".upcase
+      expect(page).to have_content "Park improvements"
     end
 
     scenario "Trigger validation errors in edit view" do
@@ -856,7 +856,7 @@ describe "Budget Investments" do
 
     visit budget_investment_path(budget, id: investment.id)
 
-    expect(page).to have_content(investment.title.upcase)
+    expect(page).to have_content(investment.title)
     expect(page).to have_content(investment.description)
     expect(page).to have_content(investment.author.name)
     expect(page).to have_content(investment.comments_count)
@@ -1004,14 +1004,14 @@ describe "Budget Investments" do
 
     visit budget_investment_path(budget, id: investment.id)
 
-    expect(page).not_to have_content("Unfeasibility explanation".upcase)
+    expect(page).not_to have_content("Unfeasibility explanation")
     expect(page).not_to have_content("Local government is not competent in this")
     expect(page).not_to have_content("This investment project has been marked as not feasible "\
                                      "and will not go to balloting phase")
 
     visit budget_investment_path(budget, id: investment_2.id)
 
-    expect(page).to have_content("Unfeasibility explanation".upcase)
+    expect(page).to have_content("Unfeasibility explanation")
     expect(page).to have_content("The unfeasible explanation")
     expect(page).to have_content("This investment project has been marked as not feasible "\
                                  "and will not go to balloting phase")
@@ -1399,7 +1399,7 @@ describe "Budget Investments" do
       visit budget_investments_path(budget, heading_id: heading.id)
 
       click_link "by price"
-      expect(page).to have_selector("a.is-active", text: "by price".upcase)
+      expect(page).to have_selector("a.is-active", text: "by price")
 
       within "#budget-investments" do
         expect(high_investment.title).to appear_before(mid_investment.title)
@@ -1594,7 +1594,7 @@ describe "Budget Investments" do
 
       visit budget_investment_path(budget, investment)
 
-      expect(page).to have_content investment.title.upcase
+      expect(page).to have_content investment.title
       expect(page).not_to have_link("Vote")
     end
 
@@ -1609,7 +1609,7 @@ describe "Budget Investments" do
         login_as(user)
         visit budget_ballot_path(budget)
 
-        expect(page).to have_content("You have voted 0 investment".upcase)
+        expect(page).to have_content("You have voted 0 investment")
       end
 
       scenario "Due to being unfeasible" do
@@ -1621,7 +1621,7 @@ describe "Budget Investments" do
         login_as(user)
         visit budget_ballot_path(budget)
 
-        expect(page).to have_content("You have voted 0 investment".upcase)
+        expect(page).to have_content("You have voted 0 investment")
       end
     end
   end

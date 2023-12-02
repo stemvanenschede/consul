@@ -20,7 +20,6 @@ en:
         link: "Another optional call to action"
     feed:
       most_active:
-        proposals: "Featured proposals"
         budgets: "Participatory budgets"
       see_budget: "See this budget"
     steps:

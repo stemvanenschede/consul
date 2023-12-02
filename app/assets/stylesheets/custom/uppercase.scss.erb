@@ -1,0 +1,10 @@
+<% unless Rails.env.test? %>
+  .public,
+  .auth-page {
+
+    h1,
+    h2 {
+      text-transform: uppercase;
+    }
+  }
+<% end %>

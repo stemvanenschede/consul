@@ -11,7 +11,7 @@ describe "Budgets" do
     scenario "finds budget by slug" do
       visit budget_path("budget_slug")
 
-      expect(page).to have_content budget.name.upcase
+      expect(page).to have_content budget.name
     end
   end
 
@@ -28,12 +28,12 @@ describe "Budgets" do
         visit budgets_path
 
         within(".budget-subheader") do
-          expect(page).to have_content("Publishing projects prices".upcase)
+          expect(page).to have_content("Publishing projects prices")
         end
 
         within("#budget_info") do
-          expect(page).to have_content(group1.name.upcase)
-          expect(page).to have_content(group2.name.upcase)
+          expect(page).to have_content(group1.name)
+          expect(page).to have_content(group2.name)
           expect(page).to have_content(heading1.name)
           expect(page).to have_content(budget.formatted_heading_price(heading1))
           expect(page).to have_content(heading2.name)
@@ -106,8 +106,8 @@ describe "Budgets" do
       visit budgets_path
 
       within("#budget_info") do
-        expect(page).not_to have_link heading.name.upcase
-        expect(page).to have_content "#{heading.name.upcase}\n€1,000,000"
+        expect(page).not_to have_link heading.name
+        expect(page).to have_content "#{heading.name}\n€1,000,000"
       end
     end
 
@@ -118,7 +118,7 @@ describe "Budgets" do
       visit budgets_path
 
       within("#budget_info") do
-        expect(page).to have_content heading.name.upcase
+        expect(page).to have_content heading.name
         expect(page).not_to have_content "€"
       end
     end
@@ -153,10 +153,10 @@ describe "Budgets" do
 
       visit budgets_path
 
-      expect(page).not_to have_content "Single group".upcase
+      expect(page).not_to have_content "Single group"
 
       within ".single-heading" do
-        expect(page).to have_content "New heading".upcase
+        expect(page).to have_content "New heading"
         expect(page).to have_content "€10,000"
       end
     end
@@ -169,7 +169,7 @@ describe "Budgets" do
       visit budgets_path
 
       within("#groups_and_headings") do
-        expect(page).to have_content "New group".upcase
+        expect(page).to have_content "New group"
         expect(page).to have_content "New heading"
         expect(page).to have_content "€10,000"
         expect(page).to have_content "Other new heading"

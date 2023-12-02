@@ -8,7 +8,7 @@ describe "Subscriptions" do
       user.update!(locale: "es")
       visit edit_subscriptions_path(token: user.subscriptions_token)
 
-      expect(page).to have_content "Notificaciones".upcase
+      expect(page).to have_content "Notificaciones"
       expect(page).to have_field "Recibir un email cuando alguien comenta en mis contenidos", type: :checkbox
       expect(page).to have_field "Recibir un email cuando alguien contesta a mis comentarios", type: :checkbox
       expect(page).to have_field "Recibir emails con información interesante sobre la web", type: :checkbox
@@ -20,7 +20,7 @@ describe "Subscriptions" do
     scenario "Use the locale in the parameters when accessing anonymously" do
       visit edit_subscriptions_path(token: user.subscriptions_token, locale: :es)
 
-      expect(page).to have_content "Notificaciones".upcase
+      expect(page).to have_content "Notificaciones"
     end
   end
 

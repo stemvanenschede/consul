@@ -21,7 +21,7 @@ describe "Admin proposal notifications", :admin do
     login_as(proposal_notification.author)
     visit proposal_notification_path(proposal_notification)
 
-    expect(page).to have_content(proposal_notification.title.upcase)
+    expect(page).to have_content(proposal_notification.title)
   end
 
   scenario "Confirm hide" do

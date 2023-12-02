@@ -26,7 +26,7 @@ describe "Homepage", :admin do
   end
 
   context "Feeds" do
-    scenario "Proposals", :consul do
+    scenario "Proposals" do
       5.times { create(:proposal) }
 
       visit admin_homepage_path
@@ -62,14 +62,14 @@ describe "Homepage", :admin do
       visit root_path
 
       within("#feed_debates") do
-        expect(page).to have_content "Most active debates".upcase
+        expect(page).to have_content "Most active debates"
         expect(page).to have_css(".debate", count: 2)
       end
 
       expect(page).not_to have_css("#feed_debates.medium-4")
     end
 
-    scenario "Proposals and debates", :consul do
+    scenario "Proposals and debates" do
       3.times { create(:proposal) }
       3.times { create(:debate) }
 
@@ -115,7 +115,7 @@ describe "Homepage", :admin do
 
       visit root_path
 
-      expect(page).to have_content "Open processes".upcase
+      expect(page).to have_content "Open processes"
       expect(page).to have_css(".legislation-process", count: 3)
     end
 
@@ -222,6 +222,6 @@ describe "Homepage", :admin do
     login_as(user)
     visit root_path
 
-    expect(page).to have_content("Recommendations that may interest you".upcase)
+    expect(page).to have_content("Recommendations that may interest you")
   end
 end

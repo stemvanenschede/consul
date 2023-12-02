@@ -15,7 +15,7 @@ describe "Legislation Proposals" do
     imageable_attach_new_file(file_fixture("clippy.jpg"))
     click_button "Create proposal"
 
-    expect(page).to have_content "Legislation proposal with image".upcase
+    expect(page).to have_content "Legislation proposal with image"
     expect(page).to have_content "Including an image on a legislation proposal"
     expect(page).to have_css "img[alt='clippy.jpg']"
   end

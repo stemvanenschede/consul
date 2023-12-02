@@ -11,14 +11,14 @@ describe "Legislation" do
       visit send(path, not_published_process)
 
       expect(page).to have_content not_permission_message
-      expect(page).not_to have_content("Process not published".upcase)
+      expect(page).not_to have_content("Process not published")
     end
 
     it "is available for an administrator user" do
       login_as(administrator)
       visit send(path, not_published_process)
 
-      expect(page).to have_content("Process not published".upcase)
+      expect(page).to have_content("Process not published")
     end
   end
 

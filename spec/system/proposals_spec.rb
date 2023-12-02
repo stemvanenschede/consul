@@ -118,7 +118,7 @@ describe "Proposals" do
 
     visit proposal_path(proposal)
 
-    expect(page).to have_content proposal.title.upcase
+    expect(page).to have_content proposal.title
     expect(page).to have_content proposal.code
     expect(page).to have_content "Proposal description"
     expect(page).to have_content proposal.author.name
@@ -216,7 +216,7 @@ describe "Proposals" do
       visit proposal_path(proposal)
       click_link "Help"
 
-      expect(page).to have_content "CONSUL is a platform for citizen participation".upcase
+      expect(page).to have_content "CONSUL is a platform for citizen participation"
 
       go_back
 
@@ -346,7 +346,7 @@ describe "Proposals" do
     click_button "Create proposal"
 
     expect(page).to have_content "Proposal created successfully."
-    expect(page).to have_content "Help refugees".upcase
+    expect(page).to have_content "Help refugees"
     expect(page).not_to have_content "You can also see more information about improving your campaign"
 
     click_link "No, I want to publish the proposal"
@@ -638,9 +638,9 @@ describe "Proposals" do
 
       visit proposal_path(proposal)
 
-      expect(page).to have_content proposal.title.upcase
-      expect(page).to have_content "Proposal withdrawn by the author".upcase
-      expect(page).to have_content "Duplicated".upcase
+      expect(page).to have_content proposal.title
+      expect(page).to have_content "Proposal withdrawn by the author"
+      expect(page).to have_content "Duplicated"
       expect(page).to have_content "There are three other better proposals with the same subject"
     end
 
@@ -768,7 +768,7 @@ describe "Proposals" do
 
     expect(page).to have_content "Proposal updated successfully."
     expect(page).to have_content "Basically..."
-    expect(page).to have_content "End child poverty".upcase
+    expect(page).to have_content "End child poverty"
     expect(page).to have_content "Let's do something to end child poverty"
   end
 
@@ -1213,7 +1213,7 @@ describe "Proposals" do
       fill_in "search", with: "Show what you got"
       click_button "Search"
 
-      expect(page).to have_content "Search results".upcase
+      expect(page).to have_content "Search results"
 
       click_link "newest"
 
@@ -1486,12 +1486,12 @@ describe "Proposals" do
       click_link "The most supported proposals by category"
 
       within("#culture") do
-        expect(page).to have_content("Culture".upcase)
+        expect(page).to have_content("Culture")
         expect(page).to have_css(".proposal", count: 3)
       end
 
       within("#social-services") do
-        expect(page).to have_content("Social Services".upcase)
+        expect(page).to have_content("Social Services")
         expect(page).to have_css(".proposal", count: 3)
       end
     end
@@ -1507,12 +1507,12 @@ describe "Proposals" do
       click_link "The most supported proposals by category"
 
       within("#california") do
-        expect(page).to have_content("California".upcase)
+        expect(page).to have_content("California")
         expect(page).to have_css(".proposal", count: 3)
       end
 
       within("#new-york") do
-        expect(page).to have_content("New York".upcase)
+        expect(page).to have_content("New York")
         expect(page).to have_css(".proposal", count: 3)
       end
     end
