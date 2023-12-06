@@ -10,7 +10,7 @@ describe "SMS Verification" do
     fill_in "sms_phone", with: "611111111"
     click_button "Send"
 
-    expect(page).to have_content "Security code confirmation".upcase
+    expect(page).to have_content "Security code confirmation"
 
     user = user.reload
     fill_in "sms_confirmation_code", with: user.sms_confirmation_code
@@ -39,7 +39,7 @@ describe "SMS Verification" do
     fill_in "sms_phone", with: "611111111"
     click_button "Send"
 
-    expect(page).to have_content "Security code confirmation".upcase
+    expect(page).to have_content "Security code confirmation"
 
     click_button "Send"
 

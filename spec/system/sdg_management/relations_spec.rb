@@ -205,22 +205,41 @@ describe "SDG Relations" do
       end
 
       scenario "search within current tab" do
+        create(:proposal, title: "Proposal pending review")
+        create(:sdg_review, relatable: create(:proposal, title: "Proposal already reviewed"))
+
         visit sdg_management_proposals_path(filter: "pending_sdg_review")
 
+        expect(page).to have_content "Proposal pending review"
+        expect(page).not_to have_content "Proposal already reviewed"
+
+        fill_in "search", with: "non existent"
         click_button "Search"
 
+        expect(page).not_to have_content "Proposal pending review"
         expect(page).to have_css "li.is-active h2", exact_text: "Pending"
 
         visit sdg_management_proposals_path(filter: "sdg_reviewed")
 
+        expect(page).not_to have_content "Proposal pending review"
+        expect(page).to have_content "Proposal already reviewed"
+
+        fill_in "search", with: "non existent"
         click_button "Search"
 
+        expect(page).not_to have_content "Proposal already reviewed"
         expect(page).to have_css "li.is-active h2", exact_text: "Marked as reviewed"
 
         visit sdg_management_proposals_path(filter: "all")
 
+        expect(page).to have_content "Proposal pending review"
+        expect(page).to have_content "Proposal already reviewed"
+
+        fill_in "search", with: "non existent"
         click_button "Search"
 
+        expect(page).not_to have_content "Proposal pending review"
+        expect(page).not_to have_content "Proposal already reviewed"
         expect(page).to have_css "li.is-active h2", exact_text: "All"
       end
 
@@ -453,7 +472,7 @@ describe "SDG Relations" do
         visit sdg_management_edit_legislation_process_path(process)
 
         within_window(window_opened_by { click_link "SDG help page" }) do
-          expect(page).to have_content "Sustainable Development Goals help".upcase
+          expect(page).to have_content "Sustainable Development Goals help"
         end
       end
     end

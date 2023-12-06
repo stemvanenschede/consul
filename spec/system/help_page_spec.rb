@@ -14,7 +14,7 @@ describe "Help page" do
         click_link "Help"
       end
 
-      expect(page).to have_content("CONSUL is a platform for citizen participation".upcase)
+      expect(page).to have_content("CONSUL is a platform for citizen participation")
     end
 
     scenario "Help menu and page is hidden if feature is disabled" do
@@ -55,5 +55,23 @@ describe "Help page" do
     end
 
     expect(page).not_to have_link "Sustainable Development Goals help"
+  end
+
+  scenario "renders the legislation section link when the process is enabled" do
+    Setting["feature.help_page"] = true
+    Setting["process.legislation"] = true
+
+    visit page_path("help")
+
+    expect(page).to have_link "Processes", href: "#processes"
+  end
+
+  scenario "does not render the legislation section link when the process is disabled" do
+    Setting["feature.help_page"] = true
+    Setting["process.legislation"] = nil
+
+    visit page_path("help")
+
+    expect(page).not_to have_link "Processes"
   end
 end

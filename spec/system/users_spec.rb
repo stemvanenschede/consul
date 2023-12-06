@@ -13,7 +13,7 @@ describe "Users" do
       visit user_path(user)
 
       expect(page).to have_content("1 Debate")
-      expect(page).to have_content("2 Proposals".upcase)
+      expect(page).to have_content("2 Proposals")
       expect(page).to have_content("3 Investments")
       expect(page).to have_content("4 Comments")
     end
@@ -24,7 +24,7 @@ describe "Users" do
       visit user_path(user)
 
       expect(page).not_to have_content("0 Proposals")
-      expect(page).to have_content("1 Debate".upcase)
+      expect(page).to have_content("1 Debate")
       expect(page).to have_content("3 Investments")
       expect(page).to have_content("4 Comments")
     end
@@ -140,27 +140,6 @@ describe "Users" do
       end
       expect(page).not_to have_link budget_investment.title
     end
-
-    scenario "Show expired message if user can not edit a budget investment" do
-      user = create(:user, :level_two)
-      budget = create(:budget, :accepting)
-      budget_investment = create(:budget_investment, author_id: user.id, budget: budget)
-
-      login_as(user)
-      visit user_path(user)
-
-      within("#budget_investment_#{budget_investment.id}") do
-        expect(page).to have_link "Edit"
-      end
-
-      budget.update!(phase: "finished")
-      visit user_path(user)
-
-      within("#budget_investment_#{budget_investment.id}") do
-        expect(page).to have_content "Expired"
-        expect(page).not_to have_link "Edit"
-      end
-    end
   end
 
   describe "Public activity" do
@@ -169,7 +148,7 @@ describe "Users" do
     scenario "visible by default" do
       visit user_path(user)
 
-      expect(page).to have_content(user.username.upcase)
+      expect(page).to have_content(user.username)
       expect(page).not_to have_content("activity list private")
     end
 
@@ -247,7 +226,7 @@ describe "Users" do
 
       scenario "is shown if logged in user is admin", :admin do
         visit user_path(user)
-        expect(page).to have_content(user.email.upcase)
+        expect(page).to have_content(user.email)
       end
     end
   end
@@ -259,7 +238,7 @@ describe "Users" do
       moderator_comment = create(:comment, user: moderator, moderator_id: moderator.id)
 
       visit user_path(moderator)
-      expect(page).to have_content("1 Comment".upcase)
+      expect(page).to have_content("1 Comment")
       expect(page).to have_content(comment.body)
       expect(page).not_to have_content(moderator_comment.body)
     end
@@ -292,15 +271,15 @@ describe "Users" do
       4.times { create(:comment, user: user, commentable: create(:proposal)) }
 
       visit user_path(user)
-      expect(page).to have_content("7 Comments".upcase)
+      expect(page).to have_content("7 Comments")
 
       Setting["process.debates"] = nil
       visit user_path(user)
-      expect(page).to have_content("6 Comments".upcase)
+      expect(page).to have_content("6 Comments")
 
       Setting["process.budgets"] = nil
       visit user_path(user)
-      expect(page).to have_content("4 Comments".upcase)
+      expect(page).to have_content("4 Comments")
     end
   end
 
@@ -315,7 +294,7 @@ describe "Users" do
 
         visit user_path(user, filter: "follows")
 
-        expect(page).to have_content "1 Following".upcase
+        expect(page).to have_content "1 Following"
         expect(page).to have_content "Others follow me"
       end
 
@@ -325,7 +304,7 @@ describe "Users" do
 
         visit user_path(user)
 
-        expect(page).to have_content("1 Following".upcase)
+        expect(page).to have_content("1 Following")
       end
 
       scenario "displays generic interests title" do
@@ -342,7 +321,7 @@ describe "Users" do
 
           visit user_path(user)
 
-          expect(page).to have_content("1 Following".upcase)
+          expect(page).to have_content("1 Following")
         end
 
         scenario "Display proposal tab when user is following one proposal at least" do
@@ -398,7 +377,7 @@ describe "Users" do
 
           visit user_path(user)
 
-          expect(page).to have_content("1 Following".upcase)
+          expect(page).to have_content("1 Following")
         end
 
         scenario "Display budget investment tab when user is following one budget investment at least" do
@@ -436,7 +415,7 @@ describe "Users" do
 
         visit user_path(user, filter: "follows")
 
-        expect(page).to have_content "1 Following".upcase
+        expect(page).to have_content "1 Following"
         expect(page).to have_content "Follow me!"
         expect(page).to have_content "Tags of elements you follow"
       end

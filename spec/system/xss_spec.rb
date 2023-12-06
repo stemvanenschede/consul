@@ -176,7 +176,7 @@ describe "Cross-Site Scripting protection" do
     visit legislation_process_draft_version_path(version.process, version)
 
     expect(page.text).not_to be_empty
-    expect(page).to have_css "h1#title-1", text: "Title 1".upcase
+    expect(page).to have_css "h1#title-1", text: "Title 1"
     expect(page).to have_link "link", href: "https://domain.com/url"
     expect(page).to have_css('img[src="/image.png"')
   end

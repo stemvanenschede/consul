@@ -65,7 +65,6 @@
   h1,
   h2 {
     font-family: "Sklonar" !important;
-    text-transform: uppercase;
   }
 
   h2 {
@@ -209,6 +208,31 @@ body .top-bar-title {
   }
 }
 
+.debate-show,
+.proposal-show,
+.poll-question-show,
+.budget-investment-show,
+.polls-show,
+.debate-quiz,
+.draft-panels,
+.debate-questions,
+.communities-show,
+.topic-show,
+.milestone-content {
+
+  a {
+    color: $brand-red;
+    text-decoration: underline;
+  }
+
+  ul,
+  ol {
+
+    li {
+      font-size: $base-font-size;
+    }
+  }
+}
 
 // 1. Header
 // --------------------
@@ -401,15 +425,12 @@ body .top-bar-title {
   background: $brand;
   padding-top: $line-height * 3;
 
-  .footer-title {
-    color: $brand-secondary;
+  a {
+    color: #fff !important;
   }
 
-  .social {
-
-    a {
-      color: #fff !important;
-    }
+  .footer-title {
+    color: $brand-secondary;
   }
 }
 

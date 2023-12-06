@@ -23,11 +23,11 @@ describe "Admin hidden users", :admin do
 
     accept_confirm("Are you sure? Restore \"#{user.name}\"") { click_button "Restore" }
 
-    expect(page).not_to have_content(user.username.upcase)
+    expect(page).not_to have_content(user.username)
 
     visit user_path(user)
 
-    expect(page).to have_content(user.username.upcase)
+    expect(page).to have_content(user.username)
   end
 
   scenario "Confirm hide" do

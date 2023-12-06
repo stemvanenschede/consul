@@ -1,14 +1,12 @@
 module Attachable
-  include HasAttachment
   extend ActiveSupport::Concern
 
   included do
-    has_attachment :attachment
+    has_one_attached :attachment
     attr_accessor :cached_attachment
 
-    validate :attachment_presence
-
     validates :attachment,
+      presence: true,
       file_content_type: {
         allow: ->(record) { record.accepted_content_types },
         if: -> { association_class && attachment.attached? },
@@ -20,7 +18,7 @@ module Attachable
       },
       file_size: {
         less_than_or_equal_to: ->(record) { record.max_file_size.megabytes },
-        if: -> { association_class && attachment.attached? },
+        if: -> { association_class && attachment.attached? && attachment.new_record? },
         message: ->(record, *) do
           I18n.t("#{record.model_name.plural}.errors.messages.in_between",
                  min: "0 Bytes",
@@ -64,12 +62,4 @@ module Attachable
   def file_path
     ActiveStorage::Blob.service.path_for(attachment.blob.key)
   end
-
-  private
-
-    def attachment_presence
-      unless attachment.attached?
-        errors.add(:attachment, I18n.t("errors.messages.blank"))
-      end
-    end
 end

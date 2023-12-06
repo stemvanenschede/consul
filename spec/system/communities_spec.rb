@@ -11,7 +11,7 @@ describe "Communities" do
       visit community_path(community)
 
       expect(page).to have_content "PROPOSAL COMMUNITY"
-      expect(page).to have_content proposal.title.upcase
+      expect(page).to have_content proposal.title
       expect(page).to have_content "Participate in the community of this proposal"
       expect(page).to have_link("Create topic", href: new_community_topic_path(community))
     end
