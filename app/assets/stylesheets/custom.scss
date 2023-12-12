@@ -220,7 +220,7 @@ body .top-bar-title {
 .topic-show,
 .milestone-content {
 
-  a {
+  a:not(.button) {
     color: $brand-red;
     text-decoration: underline;
   }
