@@ -181,7 +181,7 @@ nl:
       header:
         check_ballot: "Bekijk mijn stemmen"
         check_ballot_link: "Bekijk mijn stemmen"
-        price: "Dit proces heeft een budget van"
+        price: "Dit project heeft een budget van"
         change_ballot: "Als je je bedenkt kun je je stemmen in %{check_ballot} verwijderen en opnieuw beginnen."
         different_heading_assigned: "Je hebt al gestemd in een andere groep: %{heading_link}"
       share:
@@ -193,6 +193,9 @@ nl:
         recommendation_three: "wat er nodig is voor de realisatie ervan"
         recommendation_four: "wat je zelf wilt of kunt doen voor de realisatie"
         recommendation_five: "of het eenmalig is (zoals een activiteit) of voor meerdere jaren (zoals een voorziening)"
+    investments_list:
+      title: "Ideeën"
+      see_all: "Bekijk alle ideeën"
     show:
       see_all_investments: "Bekijk alle ideeën"
       investments_list: "Ideeën"
