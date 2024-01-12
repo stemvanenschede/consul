@@ -69,6 +69,7 @@
 
   h2 {
     color: $brand-red;
+    font-size: rem-calc(24) !important;
   }
 
   h3 {
@@ -432,6 +433,14 @@ body .top-bar-title {
   .footer-title {
     color: $brand-secondary;
   }
+
+  .social {
+    padding-left: 0;
+
+    ul {
+      text-align: left;
+    }
+  }
 }
 
 .subfooter {
@@ -455,6 +464,10 @@ body .top-bar-title {
 }
 
 .budget-phases {
+
+  h2 {
+    text-align: left;
+  }
 
   .tabs-title {
 
@@ -834,5 +847,15 @@ body .top-bar-title {
   .budget-next-phase-disabled {
     display: inline-block;
     margin-bottom: rem-calc(36);
+  }
+
+  .budget-phase {
+    @include breakpoint(medium) {
+      @include flex-with-gap;
+
+      > * {
+        width: auto;
+      }
+    }
   }
 }
