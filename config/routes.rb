@@ -48,7 +48,7 @@ Rails.application.routes.draw do
   # Custom routes
   get "datkanbeter", to: redirect("/legislation/processes")
   get "schreurserve", to: redirect("/budgets/35")
-  get "glanerbrug", to: redirect("/budgets/36")
+  get "glanerbrug", to: redirect("/budgets/43")
   get "mekdep", to: redirect("/budgets/37")
   get "drienerweg", to: redirect("/budgets/40")
   get "zuid", to: redirect("/budgets/42")
