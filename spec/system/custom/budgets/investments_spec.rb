@@ -329,4 +329,45 @@ describe "Budget Investments" do
       within(".sdg-goal-tag-list") { expect(page).to have_link "1. No Poverty" }
     end
   end
+
+  context "Evaluating Phase" do
+    before do
+      budget.update!(phase: "valuating")
+      budget.phases.selecting.update!(enabled: false)
+    end
+
+    context "When selecting phase is disabled" do
+      scenario "Sidebar in show should not display support text and count" do
+        investment = create(:budget_investment, :selected, budget: budget, voters: [create(:user)])
+
+        visit budget_investment_path(budget, investment)
+
+        within("aside") do
+          expect(page).not_to have_content "SUPPORTS"
+          expect(page).not_to have_content "1 support"
+        end
+      end
+
+      scenario "Index should not display support count" do
+        investment = create(:budget_investment, budget: budget, heading: heading, voters: [create(:user)])
+
+        visit budget_investments_path(budget, heading_id: heading.id)
+
+        within("#budget_investment_#{investment.id}") do
+          expect(page).not_to have_content "1 support"
+        end
+      end
+
+      scenario "Show should not display support text and count" do
+        investment = create(:budget_investment, budget: budget, heading: heading, voters: [create(:user)])
+
+        visit budget_investment_path(budget, investment)
+
+        within("#budget_investment_#{investment.id}") do
+          expect(page).not_to have_content "SUPPORTS"
+          expect(page).not_to have_content "1 support"
+        end
+      end
+    end
+  end
 end
