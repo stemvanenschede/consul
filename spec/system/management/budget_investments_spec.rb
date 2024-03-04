@@ -454,7 +454,7 @@ describe "Budget Investments" do
       expect(page).to have_content("Children")
     end
 
-    scenario "Printing budget investments" do
+    scenario "Printing budget investments", :consul do
       16.times { create(:budget_investment, heading: heading) }
 
       login_as_manager(manager)

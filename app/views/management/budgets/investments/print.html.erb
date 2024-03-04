@@ -23,7 +23,7 @@
       </div>
 
       <% @investments.each do |investment| %>
-        <%= render "/budgets/investments/investment",
+        <%= render "/budgets/investments/management_investment",
           investment: investment,
           investment_ids: @investment_ids,
           ballot: @ballot %>
