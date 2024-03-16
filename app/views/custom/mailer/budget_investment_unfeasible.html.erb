@@ -16,7 +16,7 @@
     <%= sanitize(
       t("mailers.budget_investment_unfeasible.new",
         url: link_to(t("mailers.budget_investment_unfeasible.new_href"),
-                     budget_investment_url(@investment.budget, @investment),
+                     new_budget_investment_url(@investment.budget),
                      style: css_for_mailer_link)
       ),
       attributes: %w[href style]
